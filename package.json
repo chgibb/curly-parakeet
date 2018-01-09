@@ -1,0 +1,28 @@
+{
+  "name": "curly-parakeet",
+  "version": "0.0.1",
+  "description": "COMP4310 Web Health Informatics Final Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node_modules/.bin/http-server -c-1 ./dist -p 8888",
+    "build": "bash scripts/bundle.bash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chgibb/curly-parakeet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chgibb/curly-parakeet/issues"
+  },
+  "homepage": "https://github.com/chgibb/curly-parakeet#readme",
+  "devDependencies": {
+    "@types/node": "^9.3.0",
+    "browserify": "^15.0.0",
+    "http-server": "^0.10.0",
+    "monaco-editor": "^0.10.1",
+    "typescript": "^2.6.2"
+  }
+}

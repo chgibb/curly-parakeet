@@ -1,0 +1,48 @@
+#!/bin/bash
+(set -o igncr) 2>/dev/null && set -o igncr; # For Cygwin on Windows compaibility
+
+function cleanTSArtifacts {
+	for f in $(find src -name '*.ts'); 
+	do
+		artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
+		rm $artifact
+	done
+}
+
+rm -rf dist
+printf "Running TSC\n"
+./node_modules/.bin/tsc -p tsconfig.json
+if [ $? != 0 ]; then
+    cleanTSArtifacts
+    exit 1
+fi
+
+printf "Done\n"
+
+mkdir dist
+mkdir dist/vs
+
+printf "Bundling entry points\n"
+for f in src/*.js
+do
+	
+	destination=$(echo $f | awk '{gsub("src/","dist/");print}')
+
+    ./node_modules/.bin/browserify $f -o $destination
+    if [ $? != 0 ]; then
+	    cleanTSArtifacts
+		exit 1
+	fi
+
+done
+
+for f in src/*.html
+do
+    destination=$(echo $f | awk '{gsub("src/","dist/");print}')
+    cp $f $destination
+done
+printf "Done\n"
+
+cp -R node_modules/monaco-editor/dev/vs/** dist/vs
+
+cleanTSArtifacts
