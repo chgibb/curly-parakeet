@@ -1,7 +1,7 @@
-//// <reference path="./../node_modules/monaco-editor/monaco.d.ts" />
+/// <reference path="./../node_modules/monaco-editor/monaco.d.ts" />
 
 import {MonacoLoader} from "./req/monacoLoader";
-declare const monaco : any;
+
 (async function(){
     let loader : MonacoLoader = new MonacoLoader();
     await loader.loadMonaco();
@@ -9,7 +9,7 @@ declare const monaco : any;
     monaco.languages.register({
         id : "myCustomLanguage"
     });
-    monaco.languages.setMonarchTokensProvider('myCustomLanguage', {
+    monaco.languages.setMonarchTokensProvider('myCustomLanguage', <monaco.languages.IMonarchLanguage>{
         tokenizer: {
             root: [
                 [/\[error.*/, "custom-error"],
@@ -17,11 +17,12 @@ declare const monaco : any;
                 [/\[info.*/, "custom-info"],
                 [/\[[a-zA-Z 0-9:]+\]/, "custom-date"],
             ],
-        }
+        },
+        tokenPostfix : "."
     });
 
     // Define a new theme that constains only rules that match this language
-    monaco.editor.defineTheme('myCoolTheme', {
+    monaco.editor.defineTheme('myCoolTheme',{
         base: 'vs',
         inherit: false,
         rules: [
@@ -29,10 +30,11 @@ declare const monaco : any;
             { token: 'custom-error', foreground: 'ff0000', fontStyle: 'bold' },
             { token: 'custom-notice', foreground: 'FFA500' },
             { token: 'custom-date', foreground: '008800' },
-        ]
+        ],
+        colors : {}
     });
     
-    var editor = monaco.editor.create(document.getElementById('container'), {
+    var editor = monaco.editor.create(document.getElementById('container')!, {
         theme: 'myCoolTheme',
         value: getCode(),
         language: 'myCustomLanguage'
