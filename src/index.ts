@@ -2,6 +2,10 @@
 
 import {MonacoLoader} from "./req/monacoLoader";
 
+import {autoComplete} from "./req/autoComplete";
+import {getICDTokenColouring} from "./req/icdTokenColouring";
+import {buildTokenLayout,buildMonarchRootTokens} from "./req/treeLayout"
+
 (async function(){
     let loader : MonacoLoader = new MonacoLoader();
     await loader.loadMonaco();
@@ -9,31 +13,20 @@ import {MonacoLoader} from "./req/monacoLoader";
     monaco.languages.register({
         id : "icd11Language"
     });
+
     monaco.languages.setMonarchTokensProvider('icd11Language', <monaco.languages.IMonarchLanguage>{
-        tokenizer: {
-            root: [
-                [/(01 Certain Infectious or Parasitic Diseases)/,"icd11.one"]
-            ],
+        linedcls : [
+            "Start"
+        ],
+        tokenizer : {
+            root : buildMonarchRootTokens(buildTokenLayout())
         },
         tokenPostfix : "."
     });
 
     monaco.languages.registerCompletionItemProvider("icd11Language",{
         provideCompletionItems : function(model : monaco.editor.IReadOnlyModel,position){
-            var textUntilPosition = model.getValueInRange({startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column});
-            let match = textUntilPosition.match(/\s/);
-            if(match)
-            {
-                return [];
-            }
-            return [
-                {
-                    label : "Certain Infectious or Parasitic Diseases",
-                    kind : monaco.languages.CompletionItemKind.Function,
-                    documentation : "This chapter includes certain conditions caused by a pathogenic organism or microorganism, such as a bacterium, virus, parasite, or fungus.",
-                    insertText : "01 Certain Infectious or Parasitic Diseases"
-                }
-            ];
+            return autoComplete(model,position);
         }
     });
 
@@ -41,16 +34,15 @@ import {MonacoLoader} from "./req/monacoLoader";
     monaco.editor.defineTheme('icd11Theme',{
         base: 'vs',
         inherit: false,
-        rules: [
-            { token: "icd11.one", foreground: "008800"}
-        ],
+        rules: getICDTokenColouring(),
         colors : {}
     });
     
     var editor = monaco.editor.create(document.getElementById('container')!, {
         theme: 'icd11Theme',
         value: "",
-        language: 'icd11Language'
+        language: 'icd11Language',
+        autoIndent : true
     });
 })().catch((err) => {
     throw err;
