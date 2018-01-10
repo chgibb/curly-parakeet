@@ -2,6 +2,7 @@
 
 import {ICDSection} from "./../../icdToken";
 import {Bacterial} from "./bacterial";
+import {FoodBorne} from "./foodBorne";
 
 export class Gastro extends ICDSection
 {
@@ -17,5 +18,6 @@ export class Gastro extends ICDSection
             insertText : `Gastroenteritis and Colitis of Infectious Origin Start${"\n"}    ${"\n"}End`
         };
         this.childSections.push(new Bacterial());
+        this.childSections.push(new FoodBorne());
     }
 }
