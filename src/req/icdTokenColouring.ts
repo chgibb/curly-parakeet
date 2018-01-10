@@ -13,7 +13,7 @@ export function getICDTokenColouring() : Array<ICDTokenThemeRule>
     let res : Array<ICDTokenThemeRule> = new Array<ICDTokenThemeRule>();
 
     res.push(<ICDTokenThemeRule>{
-        token : "icd11.SectionHeader",
+        token : "icd11.SectionTopHeader",
         foreground : "4542f4"
     });
 
