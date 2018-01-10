@@ -3,6 +3,7 @@
 import {Start,End,ICDSection, ICDGenericToken} from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
+
 let startToken : Start;
 let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
@@ -66,13 +67,34 @@ export function autoComplete(text : string): Array<monaco.languages.CompletionIt
             let closestHeader : ICDSection | undefined = undefined;
             for(let i = 0; i != lines.length; ++i)
             {
+                console.log(`inspecting ${lines[i]}`);
+                if(endToken.regExp.test(lines[i]))
+                {
+                    while(i != lines.length)
+                    {
+                        if(startToken.regExp.test(lines[i]))
+                        {
+                            console.log(`ended at ${lines[i]}`);
+                            closestHeader = undefined;
+                            break;
+                        }
+                        i++;
+                    }
+                    console.log(`walked up to ${lines[i]}`);
+                    continue;
+                }
                 if(closestHeader)
                 {
-                    console.log(`found closest ${closestHeader.completionItem.label}`);
                     break;
                 }
                 else
+                {
                     closestHeader = findHeader(topHeader,lines[i]);
+                    console.log(`method returned`);
+                    console.log(closestHeader);
+                    if(closestHeader)
+                        break;
+                }
             }
             if(closestHeader)
             {
@@ -97,6 +119,9 @@ function findHeader(start : ICDSection,line : string) : ICDSection | undefined
         for(let i = 0; i != start.childSections.length; ++i)
         {
             res = findHeader(start.childSections[i],line);
+            if(res)
+                return res;
+            
         }
     }
     return res;
