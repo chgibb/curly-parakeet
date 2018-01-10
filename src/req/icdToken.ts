@@ -17,6 +17,7 @@ class ICDAttributes extends ICDGenericToken
 export class ICDSection extends ICDAttributes
 {
     public childSections : Array<ICDSection>;
+    public childItems : Array<ICDItem>;
     public items : Array<ICDItem>;
 
     public constructor()

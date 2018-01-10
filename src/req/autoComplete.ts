@@ -102,6 +102,13 @@ export function autoComplete(text : string): Array<monaco.languages.CompletionIt
                 {
                     res.push(closestHeader.childSections[k].completionItem);
                 }
+                if(closestHeader.childItems)
+                {
+                    for(let k = 0; k != closestHeader.childItems.length; ++k)
+                    {
+                        res.push(closestHeader.childItems[k].completionItem);
+                    }
+                }
             }
         }
         
