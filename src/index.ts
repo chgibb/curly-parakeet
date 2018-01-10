@@ -15,9 +15,6 @@ import {buildTokenLayout,buildMonarchRootTokens} from "./req/treeLayout"
     });
 
     monaco.languages.setMonarchTokensProvider('icd11Language', <monaco.languages.IMonarchLanguage>{
-        linedcls : [
-            "Start"
-        ],
         tokenizer : {
             root : buildMonarchRootTokens(buildTokenLayout())
         },
