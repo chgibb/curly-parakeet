@@ -18,6 +18,11 @@ export function getICDTokenColouring() : Array<ICDTokenThemeRule>
     });
 
     res.push(<ICDTokenThemeRule>{
+        token : "icd11.SectionHeader",
+        foreground : "16f7b0"
+    });
+
+    res.push(<ICDTokenThemeRule>{
         token : "icd11.Start",
         foreground : "ac41f4"
     });

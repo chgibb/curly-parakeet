@@ -15,15 +15,29 @@ export function buildTokenLayout() : Array<ICDGenericToken | ICDSection>
     return res;
 }
 
-export function buildMonarchRootTokens(
+export function buildMonarchTokens(
     layout : Array<ICDGenericToken | ICDSection>
-) : Array<{[name:number]:RegExp|string}> {
-    let res = new Array<{[name:number]:RegExp|string}>();
+) : Array<{[name : number] : RegExp | string}> {
+    let res = new Array<{[name : number] : RegExp | string}>();
     
     for(let i = 0; i != layout.length; ++i)
     {
-        res.push([layout[i].regExp,layout[i].tokenType]);
+        getNestedMonarchTokens(layout[i],res);
     }
-
     return res;
+}
+
+function getNestedMonarchTokens(
+    start : ICDGenericToken | ICDSection,
+    res : Array<{[name : number] : RegExp | string}>
+) : void {
+    res.push([start.regExp,start.tokenType]);
+
+    if((<ICDSection>start).childSections)
+    {
+        for(let i = 0; i != (<ICDSection>start).childSections.length; ++i)
+        {
+            getNestedMonarchTokens((<ICDSection>start).childSections[i],res);
+        }
+    }
 }
