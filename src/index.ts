@@ -26,10 +26,14 @@ import {buildTokenLayout,buildMonarchRootTokens} from "./req/treeLayout"
 
     monaco.languages.registerCompletionItemProvider("icd11Language",{
         provideCompletionItems : function(model : monaco.editor.IReadOnlyModel,position){
-            let textUntilPosition = model.getValueInRange({ startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column });
-            let item = autoComplete(textUntilPosition);
-            if(item)
-                return item;
+            try
+            {
+                let textUntilPosition = model.getValueInRange({ startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column });
+                let item = autoComplete(textUntilPosition);
+                if(item)
+                    return item;
+            }
+            catch(err){}
             return [];
         }
     });
