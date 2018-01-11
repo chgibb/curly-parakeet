@@ -44,3 +44,21 @@ it(`should auto complete gastro section header`,() => {
     let res : void | monaco.languages.CompletionItem[] = autoComplete(doc);
     expect((<monaco.languages.CompletionItem[]>res)[0].label).toBe(gastro.completionItem.label);
 });
+
+it(`should auto complete gastro section header`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "   Gastroenteritis and Colitis of Infectious Origin Start",
+        "      Bacterial Foodborne Intoxications Start",
+        "          ",
+        "      End",
+        "      Bacterial Intestinal Infections Start",
+        "          ",
+        "      End ",
+        "   End",
+        "   "
+    ].join("\n");
+
+    let res : void | monaco.languages.CompletionItem[] = autoComplete(doc);
+    expect((<monaco.languages.CompletionItem[]>res)[0].label).toBe(gastro.completionItem.label);
+});
