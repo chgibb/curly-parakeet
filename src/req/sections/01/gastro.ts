@@ -1,6 +1,4 @@
-/// <reference path="./../../../../node_modules/monaco-editor/monaco.d.ts" />
-
-import {ICDSection} from "./../../icdToken";
+import {ICDSection,CompletionItemKind} from "./../../icdToken";
 import {Bacterial} from "./bacterial";
 import {FoodBorne} from "./foodBorne";
 
@@ -13,7 +11,7 @@ export class Gastro extends ICDSection
         this.tokenType = "icd11.SectionHeader";
         this.completionItem = {
             label : "Gastroenteritis and Colitis of Infectious Origin",
-            kind : monaco.languages.CompletionItemKind.Function,
+            kind : CompletionItemKind.Function,
             documentation : "Any condition of the intestines, caused by an infection with a bacterial source.",
             insertText : `Gastroenteritis and Colitis of Infectious Origin Start${"\n"}    ${"\n"}End`
         };

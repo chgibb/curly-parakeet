@@ -1,15 +1,13 @@
-/// <reference path="./../../node_modules/monaco-editor/monaco.d.ts" />
-
-import {Start,End,ICDSection, ICDGenericToken} from "./icdToken";
+import {Start,End,ICDSection,ICDGenericToken,CompletionItem} from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
-export function autoComplete(text : string): Array<monaco.languages.CompletionItem> | void
+export function autoComplete(text : string): Array<CompletionItem> | void
 {
-    let res : Array<monaco.languages.CompletionItem> = new Array<monaco.languages.CompletionItem>();
+    let res : Array<CompletionItem> = new Array<CompletionItem>();
     if(!startToken)
         startToken = new Start();
     if(!endToken)

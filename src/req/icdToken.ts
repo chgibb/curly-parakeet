@@ -2,6 +2,22 @@
 
 import {ICDTokenID} from "./icdTokenID";
 
+export interface CompletionItem extends monaco.languages.CompletionItem
+{
+
+}
+
+export enum CompletionItemKind 
+{
+    Text = 0,
+    Method = 1,
+    Function = 2,
+    Constructor = 3,
+    Field = 4,
+    Variable = 5,
+    Class = 6
+}
+
 export class ICDGenericToken
 {
     public regExp : RegExp;
@@ -11,7 +27,7 @@ export class ICDGenericToken
 class ICDAttributes extends ICDGenericToken
 {
     public description : string;
-    public completionItem : monaco.languages.CompletionItem;
+    public completionItem : CompletionItem;
 }
 
 export class ICDSection extends ICDAttributes

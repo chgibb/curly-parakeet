@@ -1,5 +1,3 @@
-/// <reference path="./../../node_modules/monaco-editor/monaco.d.ts" />
-
 import {ICDTokenID} from "./icdTokenID";
 import {ICDItem, ICDGenericToken, Start, End, ICDSection} from "./icdToken"
 import {ZeroOne} from "./sections/01";

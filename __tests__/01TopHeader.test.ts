@@ -1,6 +1,4 @@
 /// <reference types="ts-jest" />
-/// <reference path="./../node_modules/monaco-editor/monaco.d.ts" />
-
 
 import {autoComplete} from "./../src/req/autoComplete";
 import {ZeroOne} from "./../src/req/sections/01";
