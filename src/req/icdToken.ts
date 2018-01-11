@@ -70,6 +70,24 @@ export class Start extends ICDGenericToken
     }
 }
 
+export function findSectionHeader(start : ICDSection,line : string) : ICDSection | undefined
+{
+    let res : ICDSection | undefined;
+    if(start.regExp.test(line))
+        return start;
+    if(start.childSections)
+    {
+        for(let i = 0; i != start.childSections.length; ++i)
+        {
+            res = findSectionHeader(start.childSections[i],line);
+            if(res)
+                return res;
+            
+        }
+    }
+    return res;
+}
+
 export class End extends ICDGenericToken
 {
     public constructor()

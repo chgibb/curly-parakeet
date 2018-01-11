@@ -1,4 +1,11 @@
-import {Start,End,ICDSection,ICDGenericToken,ICDCompletionItem} from "./icdToken";
+import {
+    Start,
+    End,
+    ICDSection,
+    ICDGenericToken,
+    ICDCompletionItem,
+    findSectionHeader
+} from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
@@ -97,7 +104,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                 }
                 else
                 {
-                    closestHeader = findHeader(topHeader,lines[i]);
+                    closestHeader = findSectionHeader(topHeader,lines[i]);
                     console.log(`method returned`);
                     console.log(closestHeader);
                     if(closestHeader)
@@ -124,20 +131,3 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
     return res;
 }
 
-function findHeader(start : ICDSection,line : string) : ICDSection | undefined
-{
-    let res : ICDSection | undefined;
-    if(start.regExp.test(line))
-        return start;
-    if(start.childSections)
-    {
-        for(let i = 0; i != start.childSections.length; ++i)
-        {
-            res = findHeader(start.childSections[i],line);
-            if(res)
-                return res;
-            
-        }
-    }
-    return res;
-}
