@@ -6,6 +6,7 @@ export interface ICDCompletionItem extends monaco.languages.CompletionItem
 {
 
 }
+
 /**
  * This is copied directly from monaco's source to remove the explicit runtime dependency on the monaco API.
  * This will break if monaco changes it's equivalent enum
