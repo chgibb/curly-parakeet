@@ -26,6 +26,8 @@ import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
             try
             {
                 let textUntilPosition = model.getValueInRange({ startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column });
+                console.log("textUntilPosition");
+                console.log(textUntilPosition);
                 let item = autoComplete(textUntilPosition);
                 if(item)
                     return item;

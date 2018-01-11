@@ -7,6 +7,7 @@ let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
 export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
+    console.log(`input string: "${text}"`);
     let res : Array<ICDCompletionItem> = new Array<ICDCompletionItem>();
     if(!startToken)
         startToken = new Start();
@@ -14,7 +15,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         endToken = new End();
     if(!layout)
         layout  = buildTokenLayout();
-    let lines = text.split(/\n/);
+    let lines = text.split(/\r\n|\n\r|\n|\r/g);
     console.log(lines);
     let starts = 0;
     let ends = 0;
