@@ -1,13 +1,13 @@
-import {Start,End,ICDSection,ICDGenericToken,CompletionItem} from "./icdToken";
+import {Start,End,ICDSection,ICDGenericToken,ICDCompletionItem} from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
-export function autoComplete(text : string): Array<CompletionItem> | void
+export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
-    let res : Array<CompletionItem> = new Array<CompletionItem>();
+    let res : Array<ICDCompletionItem> = new Array<ICDCompletionItem>();
     if(!startToken)
         startToken = new Start();
     if(!endToken)

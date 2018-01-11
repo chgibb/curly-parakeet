@@ -2,11 +2,17 @@
 
 import {ICDTokenID} from "./icdTokenID";
 
-export interface CompletionItem extends monaco.languages.CompletionItem
+export interface ICDCompletionItem extends monaco.languages.CompletionItem
 {
 
 }
-
+/**
+ * This is copied directly from monaco's source to remove the explicit runtime dependency on the monaco API.
+ * This will break if monaco changes it's equivalent enum
+ * 
+ * @export
+ * @enum {number}
+ */
 export enum CompletionItemKind 
 {
     Text = 0,
@@ -27,7 +33,7 @@ export class ICDGenericToken
 class ICDAttributes extends ICDGenericToken
 {
     public description : string;
-    public completionItem : CompletionItem;
+    public completionItem : ICDCompletionItem;
 }
 
 export class ICDSection extends ICDAttributes
