@@ -9,3 +9,15 @@ it(`should be empty`,() => {
 
     expect(res).toBe(DocumentStatus.NoInput);
 });
+
+it(`should be unbalanced`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "End",
+        "End"
+    ].join("\n");
+
+    let res : DocumentStatus = validate(doc);
+
+    expect(res).toBe(DocumentStatus.UnBalanced);
+});
