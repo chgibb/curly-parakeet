@@ -7,7 +7,7 @@ it(`should be empty`,() => {
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatusCode.NoInput);
+    expect(res.code).toBe(DocumentStatusCode.NoInput);
 });
 
 it(`should be unbalanced`,() => {
@@ -19,7 +19,7 @@ it(`should be unbalanced`,() => {
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatusCode.UnBalanced);
+    expect(res.code).toBe(DocumentStatusCode.UnBalanced);
 });
 
 it(`should be unbalanced`,() => {
@@ -33,5 +33,5 @@ it(`should be unbalanced`,() => {
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatusCode.UnBalanced);
+    expect(res.code).toBe(DocumentStatusCode.UnBalanced);
 })
