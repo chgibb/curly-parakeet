@@ -7,6 +7,12 @@ function cleanTSArtifacts {
 		artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
 		rm $artifact
 	done
+
+	for f in $(find __tests__ -name '*.ts'); 
+	do
+		artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
+		rm $artifact
+	done
 }
 
 rm -rf dist
