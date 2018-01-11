@@ -2,6 +2,7 @@
 
 import {MonacoLoader} from "./req/monacoLoader";
 
+import {validate} from "./req/validate";
 import {autoComplete} from "./req/autoComplete";
 import {getICDTokenColouring} from "./req/icdTokenColouring";
 import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
@@ -45,12 +46,17 @@ import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
         colors : {}
     });
     
-    var editor = monaco.editor.create(document.getElementById('container')!, {
+    let editor : monaco.editor.IStandaloneCodeEditor = monaco.editor.create(document.getElementById('container')!, {
         theme: 'icd11Theme',
         value: "",
         language: 'icd11Language',
         autoIndent : true
     });
+
+    /*setInterval(function(){
+        document.getElementById("documentStatus")!.innerHTML = validate(editor.getValue());
+    },3000);*/
+
 })().catch((err) => {
     throw err;
 });
