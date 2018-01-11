@@ -78,6 +78,10 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                 if(endToken.regExp.test(lines[i]))
                 {
                     endBlocksEncountered++;
+                    if(endBlocksEncountered > starts)
+                    {
+                        return;
+                    }
                     i++;
                     while(i != lines.length)
                     {
