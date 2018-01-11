@@ -8,12 +8,12 @@ let gastro = new Gastro();
 let foodBorne = new FoodBorne();
 
 it(`should auto complete gastro subsections`,() => {
-    let doc = 
-    `
-    01 Certain Infectious or Parasitic Diseases Start
-   Gastroenteritis and Colitis of Infectious Origin Start
-       
-    `;
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "   Gastroenteritis and Colitis of Infectious Origin Start",
+        "       "
+    ].join("\n");
+    
     let res : void | monaco.languages.CompletionItem[] = autoComplete(doc);
 
     expect((<monaco.languages.CompletionItem[]>res).length).toBeGreaterThan(0);
@@ -28,7 +28,11 @@ it(`should auto complete gastro subsections`,() => {
 });
 
 it(`should auto complete gastro subsections`,() => {
-    let doc = ["01 Certain Infectious or Parasitic Diseases Start","    Gastroenteritis and Colitis of Infectious Origin Start","       food"].join("\n");
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "    Gastroenteritis and Colitis of Infectious Origin Start",
+        "       food"
+    ].join("\n");
 
     let res : void | monaco.languages.CompletionItem[] = autoComplete(doc);
 
