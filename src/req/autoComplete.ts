@@ -63,20 +63,29 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         else
         {
             console.log(`topHeader is not null`);
+            let endBlocksEncountered = 0;
             let closestHeader : ICDSection | undefined = undefined;
             for(let i = 0; i != lines.length; ++i)
             {
                 console.log(`inspecting "${lines[i]}"`);
                 if(endToken.regExp.test(lines[i]))
                 {
+                    endBlocksEncountered++;
+                    i++;
                     while(i != lines.length)
                     {
                         if(startToken.regExp.test(lines[i]))
                         {
-                            console.log(`ended at ${lines[i]}`);
-                            closestHeader = undefined;
-                            break;
+                            endBlocksEncountered--;
+                            if(endBlocksEncountered == 0)
+                            {
+                                console.log(`ended at ${lines[i]}`);
+                                closestHeader = undefined;
+                                break;
+                            }
                         }
+                        if(endToken.regExp.test(lines[i]))
+                            endBlocksEncountered++;
                         i++;
                     }
                     console.log(`walked up to ${lines[i]}`);
