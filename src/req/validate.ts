@@ -14,11 +14,17 @@ let startToken : Start;
 let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
 
-export enum DocumentStatus
+export enum DocumentStatusCode
 {
     Valid = "All good",
     NoInput = "Document Empty",
     UnBalanced = "Unbalanced Start and End declarations",
+}
+
+export interface DocumentStatus
+{
+    code : DocumentStatusCode;
+    more : string;
 }
 
 export function validate(text : string) : DocumentStatus
@@ -43,15 +49,24 @@ export function validate(text : string) : DocumentStatus
     }
 
     if(starts != ends)
-        return DocumentStatus.UnBalanced;
+        return {
+            code : DocumentStatusCode.UnBalanced,
+            more : ""
+        };
     
     if(text.trim().length == 0)
-        return DocumentStatus.NoInput;
+        return {
+            code : DocumentStatusCode.NoInput,
+            more : ""
+        };
     
     else
     {
 
     }
 
-    return DocumentStatus.Valid;
+    return {
+        code : DocumentStatusCode.Valid,
+        more : ""
+    };
 }

@@ -1,13 +1,13 @@
 /// <reference types="ts-jest" />
 
-import {validate,DocumentStatus} from "./../../src/req/validate";
+import {validate,DocumentStatus,DocumentStatusCode} from "./../../src/req/validate";
 
 it(`should be empty`,() => {
     let doc = "";
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatus.NoInput);
+    expect(res).toBe(DocumentStatusCode.NoInput);
 });
 
 it(`should be unbalanced`,() => {
@@ -19,7 +19,7 @@ it(`should be unbalanced`,() => {
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatus.UnBalanced);
+    expect(res).toBe(DocumentStatusCode.UnBalanced);
 });
 
 it(`should be unbalanced`,() => {
@@ -33,5 +33,5 @@ it(`should be unbalanced`,() => {
 
     let res : DocumentStatus = validate(doc);
 
-    expect(res).toBe(DocumentStatus.UnBalanced);
+    expect(res).toBe(DocumentStatusCode.UnBalanced);
 })
