@@ -1,7 +1,7 @@
 /// <reference types="ts-jest" />
 
-import {autoComplete} from "./../src/req/autoComplete";
-import {ZeroOne} from "./../src/req/sections/01";
+import {autoComplete} from "./../../src/req/autoComplete";
+import {ZeroOne} from "./../../src/req/sections/01";
 
 let zeroOne = new ZeroOne();
 
