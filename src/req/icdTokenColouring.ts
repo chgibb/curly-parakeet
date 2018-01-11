@@ -32,5 +32,10 @@ export function getICDTokenColouring() : Array<ICDTokenThemeRule>
         foreground : "ac41f4"
     });
 
+    res.push(<ICDTokenThemeRule>{
+        token : "icd11.item",
+        foreground : "e8f442"
+    });
+
     return res;
 }

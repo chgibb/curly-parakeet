@@ -31,6 +31,14 @@ function getNestedMonarchTokens(
 ) : void {
     res.push([start.regExp,start.tokenType]);
 
+    if((<ICDSection>start).childItems)
+    {
+        for(let i = 0; i != (<ICDSection>start).childItems.length; ++i)
+        {
+            res.push([(<ICDSection>start).childItems[i].regExp,(<ICDSection>start).childItems[i].tokenType]);
+        }
+    }
+
     if((<ICDSection>start).childSections)
     {
         for(let i = 0; i != (<ICDSection>start).childSections.length; ++i)
