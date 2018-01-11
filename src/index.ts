@@ -22,7 +22,7 @@ import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
     });
 
     monaco.languages.registerCompletionItemProvider("icd11Language",{
-        provideCompletionItems : function(model : monaco.editor.IReadOnlyModel,position){
+        provideCompletionItems : function(model : monaco.editor.IReadOnlyModel,position : monaco.Position){
             try
             {
                 let textUntilPosition = model.getValueInRange({ startLineNumber: 1, startColumn: 1, endLineNumber: position.lineNumber, endColumn: position.column });
