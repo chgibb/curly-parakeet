@@ -65,7 +65,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
             let closestHeader : ICDSection | undefined = undefined;
             for(let i = 0; i != lines.length; ++i)
             {
-                console.log(`inspecting ${lines[i]}`);
+                console.log(`inspecting "${lines[i]}"`);
                 if(endToken.regExp.test(lines[i]))
                 {
                     while(i != lines.length)
