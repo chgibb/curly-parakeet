@@ -34,7 +34,7 @@ export function getICDTokenColouring() : Array<ICDTokenThemeRule>
 
     res.push(<ICDTokenThemeRule>{
         token : "icd11.item",
-        foreground : "e8f442"
+        foreground : "9877f9"
     });
 
     return res;
