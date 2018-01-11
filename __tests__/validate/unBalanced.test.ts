@@ -21,3 +21,17 @@ it(`should be unbalanced`,() => {
 
     expect(res).toBe(DocumentStatus.UnBalanced);
 });
+
+it(`should be unbalanced`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "   Gastroenteritis and Colitis of Infectious Origin Start",
+        "   End",
+        "End",
+        "End"
+    ].join("\n");
+
+    let res : DocumentStatus = validate(doc);
+
+    expect(res).toBe(DocumentStatus.UnBalanced);
+})
