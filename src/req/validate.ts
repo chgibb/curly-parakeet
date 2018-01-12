@@ -37,14 +37,7 @@ export function validate(text : string) : DocumentStatus
     if(!layout)
         layout  = buildTokenLayout();
     
-    let inLines = text.split(/\r\n|\n\r|\n|\r/g);
-    let lines : Array<string> = new Array<string>();
-
-    for(let i = 0; i != inLines.length; ++i)
-    {
-        if(inLines[i].trim().length != 0)
-            lines.push(inLines[i]);
-    }
+    let lines = text.split(/\r\n|\n\r|\n|\r/g);
 
     let starts = 0;
     let ends = 0;
