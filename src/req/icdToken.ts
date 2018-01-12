@@ -103,12 +103,8 @@ export function findTokenFromUnknownStart(
     line = trimStartBlockDeclaration(line);
     for(let i = 0; i != rootLayout.length; ++i)
     {
-        //console.log(`passed`);
-        //console.log(rootLayout[i]);
-        //console.log(`got`);
-
         let res = findToken((<ICDSection>rootLayout[i]),line);
-        //console.log(res)
+
         if(res)
             return res;
     }
