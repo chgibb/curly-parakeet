@@ -18,6 +18,9 @@
     "url": "https://github.com/chgibb/curly-parakeet/issues"
   },
   "homepage": "https://github.com/chgibb/curly-parakeet#readme",
+  "jest" : {
+    "bail" : true
+  },
   "devDependencies": {
     "@types/babel-core": "^6.25.3",
     "@types/jest": "^22.0.1",
