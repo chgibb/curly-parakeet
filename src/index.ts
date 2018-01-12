@@ -55,7 +55,7 @@ import {getTokenLayout,buildMonarchTokens} from "./req/treeLayout"
 
     setInterval(function(){
         let status = validate(editor.getValue());
-        document.getElementById("documentStatus")!.innerHTML = status.code + " " + status.more;
+        document.getElementById("documentStatus")!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
     },1000);
 
 })().catch((err) => {

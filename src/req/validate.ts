@@ -16,10 +16,10 @@ let endToken : End;
 
 export enum DocumentStatusCode
 {
-    Valid = "All good",
-    NoInput = "Document Empty",
-    UnBalanced = "Unbalanced Start and End declarations",
-    UnKnownToken = "Unknown token"
+    Valid = 0,
+    NoInput = 1,
+    UnBalanced = 2,
+    UnKnownToken = 3
 }
 
 export interface DocumentStatus
@@ -51,13 +51,13 @@ export function validate(text : string) : DocumentStatus
     if(starts != ends)
         return {
             code : DocumentStatusCode.UnBalanced,
-            more : ""
+            more : "Unbalanced Start and End declarations"
         };
     
     if(text.trim().length == 0)
         return {
             code : DocumentStatusCode.NoInput,
-            more : ""
+            more : "Document Empty"
         };
     
     else
@@ -72,7 +72,7 @@ export function validate(text : string) : DocumentStatus
             {
                 return {
                     code : DocumentStatusCode.UnKnownToken,
-                    more : `${trimStartBlockDeclaration(lines[i])} at line ${i+1}`
+                    more : `Unknown token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
                 };
             }
         }
@@ -80,6 +80,6 @@ export function validate(text : string) : DocumentStatus
 
     return {
         code : DocumentStatusCode.Valid,
-        more : ""
+        more : "All good"
     };
 }
