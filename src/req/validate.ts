@@ -67,9 +67,9 @@ export function validate(text : string) : DocumentStatus
             if(lines[i].trim().length == 0)
                 continue;
             lines[i] = lines[i].trim();
-            console.log(lines[i]);
+            //console.log(lines[i]);
             let section = findTokenFromUnknownStart(layout,lines[i])
-            console.log(section);
+            //console.log(section);
             if(!section)
             {
                 return {
