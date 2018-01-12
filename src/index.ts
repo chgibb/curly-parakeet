@@ -5,7 +5,7 @@ import {MonacoLoader} from "./req/monacoLoader";
 import {validate} from "./req/validate";
 import {autoComplete} from "./req/autoComplete";
 import {getICDTokenColouring} from "./req/icdTokenColouring";
-import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
+import {getTokenLayout,buildMonarchTokens} from "./req/treeLayout"
 
 (async function(){
     let loader : MonacoLoader = new MonacoLoader();
@@ -17,7 +17,7 @@ import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
 
     monaco.languages.setMonarchTokensProvider('icd11Language', <monaco.languages.IMonarchLanguage>{
         tokenizer : {
-            root : buildMonarchTokens(buildTokenLayout())
+            root : buildMonarchTokens(getTokenLayout())
         },
         tokenPostfix : "."
     });

@@ -8,12 +8,11 @@ import {
     findToken,
     findTokenFromUnknownStart
 } from "./icdToken";
-import {buildTokenLayout} from "./treeLayout";
+import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
-let layout : Array<ICDGenericToken | ICDSection>;
 
 export enum DocumentStatusCode
 {
@@ -35,8 +34,7 @@ export function validate(text : string) : DocumentStatus
         startToken = new Start();
     if(!endToken)
         endToken = new End();
-    if(!layout)
-        layout  = buildTokenLayout();
+    let layout : Array<ICDGenericToken | ICDSection> = getTokenLayout();
     
     let lines = text.split(/\r\n|\n\r|\n|\r/g);
 

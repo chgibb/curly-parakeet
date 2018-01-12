@@ -7,12 +7,12 @@ import {
     findToken,
     ICDItem
 } from "./icdToken";
-import {buildTokenLayout} from "./treeLayout";
+import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
-let layout : Array<ICDGenericToken | ICDSection>;
+
 export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
     //console.log(`input string: "${text}"`);
@@ -21,8 +21,9 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         startToken = new Start();
     if(!endToken)
         endToken = new End();
-    if(!layout)
-        layout  = buildTokenLayout();
+
+    let layout : Array<ICDGenericToken | ICDSection> = getTokenLayout();
+
     let lines = text.split(/\r\n|\n\r|\n|\r/g);
     //console.log(lines);
     let starts = 0;

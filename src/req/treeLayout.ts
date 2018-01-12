@@ -2,15 +2,18 @@ import {ICDTokenID} from "./icdTokenID";
 import {ICDItem,ICDGenericToken,Start,End,ICDSection} from "./icdToken"
 import {ZeroOne} from "./sections/01";
 
-export function buildTokenLayout() : Array<ICDGenericToken | ICDSection>
+let tokenLayout : Array<ICDGenericToken | ICDSection>;
+
+export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
 {
-    let res : Array<ICDGenericToken | ICDSection> = new Array<ICDGenericToken | ICDSection>();
-
-    res.push(new ZeroOne());
-    res.push(new Start());
-    res.push(new End());
-
-    return res;
+    if(!tokenLayout)
+    {
+        tokenLayout = new Array<ICDGenericToken | ICDSection>();
+        tokenLayout.push(new ZeroOne());
+        tokenLayout.push(new Start());
+        tokenLayout.push(new End());
+    }
+    return tokenLayout;
 }
 
 export function buildMonarchTokens(
