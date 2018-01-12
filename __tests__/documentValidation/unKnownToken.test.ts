@@ -13,6 +13,21 @@ it(`should be unknowntoken`,() => {
     let res : DocumentStatus = validate(doc);
 
     expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
-    expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases Start at line 1`)
+    expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases at line 1`);
+
+});
+
+it(`should be unknowntoken`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "   Gastroenteritis and Colitis oF Infectious Origin Start",
+        "   End",
+        "End"
+    ].join("\n");
+
+    let res : DocumentStatus = validate(doc);
+
+    expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
+    expect(res.more).toBe(`Gastroenteritis and Colitis oF Infectious Origin at line 2`);
 
 });
