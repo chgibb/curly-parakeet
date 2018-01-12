@@ -13,7 +13,7 @@ it(`should be unknowntoken`,() => {
     let res : DocumentStatus = validate(doc);
 
     expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
-    expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases at line 1`);
+    expect(res.more).toBe("Unknown token \"01 Certain Infectios or Parasitic Diseases\" at line 1");
 
 });
 
@@ -28,6 +28,6 @@ it(`should be unknowntoken`,() => {
     let res : DocumentStatus = validate(doc);
 
     expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
-    expect(res.more).toBe(`Gastroenteritis and Colitis oF Infectious Origin at line 2`);
+    expect(res.more).toBe("Unknown token \"Gastroenteritis and Colitis oF Infectious Origin\" at line 2");
 
 });
