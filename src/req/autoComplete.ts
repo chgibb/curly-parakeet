@@ -14,7 +14,7 @@ let endToken : End;
 let layout : Array<ICDGenericToken | ICDSection>;
 export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
-    console.log(`input string: "${text}"`);
+    //console.log(`input string: "${text}"`);
     let res : Array<ICDCompletionItem> = new Array<ICDCompletionItem>();
     if(!startToken)
         startToken = new Start();
@@ -23,7 +23,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
     if(!layout)
         layout  = buildTokenLayout();
     let lines = text.split(/\r\n|\n\r|\n|\r/g);
-    console.log(lines);
+    //console.log(lines);
     let starts = 0;
     let ends = 0;
     for(let i = 0; i != lines.length; ++i) 
@@ -57,7 +57,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                     if(layout[k].regExp.test(lines[i]))
                     {
                         topHeader = layout[k] as ICDSection;
-                        console.log(`inside ${topHeader.completionItem.label}`);
+                        //console.log(`inside ${topHeader.completionItem.label}`);
                         break;
                     }
                 }
@@ -69,12 +69,12 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
             return;
         else
         {
-            console.log(`topHeader is not null`);
+            //console.log(`topHeader is not null`);
             let endBlocksEncountered = 0;
             let closestHeader : ICDSection | undefined = undefined;
             for(let i = 0; i != lines.length; ++i)
             {
-                console.log(`inspecting "${lines[i]}"`);
+                //console.log(`inspecting "${lines[i]}"`);
                 if(endToken.regExp.test(lines[i]))
                 {
                     endBlocksEncountered++;
@@ -90,7 +90,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                             endBlocksEncountered--;
                             if(endBlocksEncountered == 0)
                             {
-                                console.log(`ended at ${lines[i]}`);
+                                //console.log(`ended at ${lines[i]}`);
                                 closestHeader = undefined;
                                 break;
                             }
@@ -99,7 +99,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                             endBlocksEncountered++;
                         i++;
                     }
-                    console.log(`walked up to ${lines[i]}`);
+                    //console.log(`walked up to ${lines[i]}`);
                     continue;
                 }
                 if(closestHeader)
@@ -109,8 +109,8 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                 else
                 {
                     closestHeader = findSectionHeader(topHeader,lines[i]);
-                    console.log(`method returned`);
-                    console.log(closestHeader);
+                    //console.log(`method returned`);
+                    //console.log(closestHeader);
                     if(closestHeader)
                         break;
                 }
