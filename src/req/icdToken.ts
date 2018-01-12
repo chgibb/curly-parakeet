@@ -153,37 +153,41 @@ export function findParentSectionFromLinePosition(
     layout : Array<ICDSection | ICDGenericToken>
 ) : ICDSection | undefined
 {
-    let res : ICDSection | undefined = undefined;
-
     let startToken = new Start();
     let endToken = new End();
 
     let endBlocksEncountered = 0;
-
-    for(let i = startLine; i > -1; --i)
+    try
     {
-        if(endToken.regExp.test(doc[i]))
+        for(let i = startLine; i > -1; --i)
         {
-            endBlocksEncountered++;
-            continue;
-        }
-
-        else if(startToken.regExp.test(doc[i]) && endBlocksEncountered > 0)
-        {
-            endBlocksEncountered--;
-        }
-
-        if(endBlocksEncountered == 0)
-        {
-            let possible = findTokenFromUnknownStart(layout,doc[i]);
-            if(possible)
+            if(endToken.regExp.test(doc[i]))
             {
-                if(possible.tokenType == "icd11.SectionHeader" || possible.tokenType == "icd11.SectionTopHeader")
+                endBlocksEncountered++;
+                continue;
+            }
+
+            else if(startToken.regExp.test(doc[i]) && endBlocksEncountered > 0)
+            {
+                endBlocksEncountered--;
+                if(endBlocksEncountered == 0)
+                --i;
+            }
+
+            if(endBlocksEncountered == 0)
+            {
+                let possible = findTokenFromUnknownStart(layout,doc[i]);
+                if(possible)
                 {
-                    return (<ICDSection>possible);
+                    if(possible.tokenType == "icd11.SectionHeader" || possible.tokenType == "icd11.SectionTopHeader")
+                    {
+                        return (<ICDSection>possible);
+                    }
                 }
             }
         }
     }
-    return res;
+    //we've probably walked off the top of the document
+    catch(err){}
+    return undefined;
 }
