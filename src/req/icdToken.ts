@@ -100,7 +100,7 @@ export function findTokenFromUnknownStart(
     rootLayout : Array<ICDGenericToken | ICDSection>,
     line : string
 ) : ICDSection | ICDItem | undefined {
-    line = line.trim();
+    line = trimStartBlockDeclaration(line);
     for(let i = 0; i != rootLayout.length; ++i)
     {
         //console.log(`passed`);
@@ -118,7 +118,7 @@ export function findTokenFromUnknownStart(
 export function findToken(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
 {
     let res : ICDSection | ICDItem | undefined = undefined;
-    line = line.trim();
+    line = trimStartBlockDeclaration(line);
     if(start.regExp.test(line))
         return start;
     

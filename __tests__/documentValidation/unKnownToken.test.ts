@@ -3,8 +3,7 @@
 import {validate,DocumentStatus,DocumentStatusCode} from "./../../src/req/validate";
 
 it(`should be unknowntoken`,() => {
-    expect(0).toBe(0);
-    /*let doc = [
+    let doc = [
         "01 Certain Infectios or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
         "   End",
@@ -15,5 +14,5 @@ it(`should be unknowntoken`,() => {
 
     expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
     expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases Start at line 0`)
-*/
+
 });
