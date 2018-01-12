@@ -27,3 +27,13 @@ it(`should find token in ast layout`,() => {
     let res = findTokenFromUnknownStart(layout,zeroOne.completionItem.label);
     expect(res!.completionItem.label).toBe(zeroOne.completionItem.label);
 });
+
+it(`should find token in ast layout`,() => {
+    let res = findTokenFromUnknownStart(layout,"01 Certain Infectious or Parasitic Diseases Start");
+    expect(res!.completionItem.label).toBe(zeroOne.completionItem.label);
+});
+
+it(`should find token in ast layouts`,() => {
+    let res = findToken(zeroOne,"- 1A10 Foodborne Staphylococcal Intoxication ");
+    expect(res!.completionItem.label).toBe($1a10.completionItem.label);
+});
