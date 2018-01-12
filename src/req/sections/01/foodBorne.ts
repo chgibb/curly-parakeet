@@ -3,9 +3,9 @@ import {$1A10} from "./1A10";
 
 export class FoodBorne extends ICDSection
 {
-    public constructor()
+    public constructor(parent : ICDSection | undefined)
     {
-        super();
+        super(parent);
         this.regExp = /(Bacterial Foodborne Intoxications)/;
         this.tokenType = "icd11.SectionHeader";
         this.completionItem = {
@@ -15,6 +15,6 @@ export class FoodBorne extends ICDSection
             insertText : `Bacterial Foodborne Intoxications Start${"\n"}    ${"\n"}End`
         };
         this.childItems = new Array<ICDItem>();
-        this.childItems.push(new $1A10());
+        this.childItems.push(new $1A10(this));
     }
 }

@@ -3,7 +3,7 @@
 import {autoComplete} from "./../../src/req/autoComplete";
 import {Gastro} from "./../../src/req/sections/01/gastro";
 
-let gastro = new Gastro();
+let gastro = new Gastro(undefined);
 
 it(`should auto complete gastro section header`,() => {
     let doc = [

@@ -2,9 +2,9 @@ import {ICDSection,CompletionItemKind} from "./../../icdToken";
 
 export class Bacterial extends ICDSection
 {
-    public constructor()
+    public constructor(parent : ICDSection | undefined)
     {
-        super();
+        super(parent);
         this.regExp = /(Bacterial Intestinal Infections)/;
         this.tokenType = "icd11.SectionHeader";
         this.completionItem = {

@@ -13,8 +13,8 @@ import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
 
 let zerOne = new ZeroOne();
 
-let gastro = new Gastro();
-let foodBorne = new FoodBorne();
+let gastro = new Gastro(undefined);
+let foodBorne = new FoodBorne(undefined);
 
 let zeroOne = new ZeroOne();
 

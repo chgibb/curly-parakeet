@@ -2,9 +2,9 @@ import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
 
 export class $1A10 extends ICDItem
 {
-    public constructor()
+    public constructor(parent : ICDSection | undefined)
     {
-        super();
+        super(parent);
         this.regExp = /(1A10 Foodborne Staphylococcal Intoxication)/;
         this.tokenType = "icd11.item";
         this.rawCode = "1A10";

@@ -4,8 +4,8 @@ import {autoComplete} from "./../../src/req/autoComplete";
 import {Gastro} from "./../../src/req/sections/01/gastro";
 import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
 
-let gastro = new Gastro();
-let foodBorne = new FoodBorne();
+let gastro = new Gastro(undefined);
+let foodBorne = new FoodBorne(undefined);
 
 it(`should auto complete gastro subsections`,() => {
     let doc = [

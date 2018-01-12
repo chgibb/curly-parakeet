@@ -35,6 +35,7 @@ class ICDAttributes extends ICDGenericToken
 {
     public description : string;
     public completionItem : ICDCompletionItem;
+    public parent : ICDAttributes | undefined;
 }
 
 export class ICDSection extends ICDAttributes
@@ -43,9 +44,10 @@ export class ICDSection extends ICDAttributes
     public childItems : Array<ICDItem>;
     public items : Array<ICDItem>;
 
-    public constructor()
+    public constructor(parent : ICDAttributes | undefined)
     {
         super();
+        this.parent = parent;
         this.childSections = new Array<ICDSection>();
     }
 }
@@ -54,9 +56,10 @@ export class ICDItem extends ICDAttributes
 {
     public rawCode : string;
     
-    public constructor()
+    public constructor(parent : ICDAttributes | undefined)
     {
         super();
+        this.parent = parent;
     }
 }
 

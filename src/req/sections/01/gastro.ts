@@ -4,9 +4,9 @@ import {FoodBorne} from "./foodBorne";
 
 export class Gastro extends ICDSection
 {
-    public constructor()
+    public constructor(parent : ICDSection | undefined)
     {
-        super();
+        super(parent);
         this.regExp = /(Gastroenteritis and Colitis of Infectious Origin)/;
         this.tokenType = "icd11.SectionHeader";
         this.completionItem = {
@@ -15,7 +15,7 @@ export class Gastro extends ICDSection
             documentation : "Any condition of the intestines, caused by an infection with a bacterial source.",
             insertText : `Gastroenteritis and Colitis of Infectious Origin Start${"\n"}    ${"\n"}End`
         };
-        this.childSections.push(new Bacterial());
-        this.childSections.push(new FoodBorne());
+        this.childSections.push(new Bacterial(this));
+        this.childSections.push(new FoodBorne(this));
     }
 }

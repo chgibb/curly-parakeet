@@ -7,8 +7,8 @@ import {Gastro} from "./../../src/req/sections/01/gastro";
 import {$1A10} from "./../../src/req/sections/01/1A10"
 
 let zeroOne = new ZeroOne();
-let gastro = new Gastro();
-let $1a10 = new $1A10();
+let gastro = new Gastro(undefined);
+let $1a10 = new $1A10(undefined);
 
 it(`should find token in section`,() => {
     let res = findToken(zeroOne,gastro.completionItem.label);
