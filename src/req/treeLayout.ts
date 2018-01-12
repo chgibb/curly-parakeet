@@ -6,9 +6,9 @@ export function buildTokenLayout() : Array<ICDGenericToken | ICDSection>
 {
     let res : Array<ICDGenericToken | ICDSection> = new Array<ICDGenericToken | ICDSection>();
 
-        res.push(new Start());
-        res.push(new End());
-        res.push(new ZeroOne());
+    res.push(new ZeroOne());
+    res.push(new Start());
+    res.push(new End());
 
     return res;
 }

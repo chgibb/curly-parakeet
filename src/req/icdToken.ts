@@ -70,9 +70,27 @@ export class Start extends ICDGenericToken
     }
 }
 
+export function findUnknownSectionHeader(
+    rootLayout : Array<ICDGenericToken | ICDSection>,
+    line : string
+) : ICDSection | undefined {
+    for(let i = 0; i != rootLayout.length; ++i)
+    {
+        console.log(`passed`);
+        console.log(rootLayout[i]);
+        console.log(`got`);
+
+        let res = findSectionHeader((<ICDSection>rootLayout[i]),line);
+        console.log(res)
+        if(res)
+            return res;
+    }
+    return undefined;
+}
+
 export function findSectionHeader(start : ICDSection,line : string) : ICDSection | undefined
 {
-    let res : ICDSection | undefined;
+    let res : ICDSection | undefined = undefined;
     if(start.regExp.test(line))
         return start;
     if(start.childSections)

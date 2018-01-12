@@ -4,7 +4,8 @@ import {
     ICDSection,
     ICDGenericToken,
     ICDCompletionItem,
-    findSectionHeader
+    findSectionHeader,
+    findUnknownSectionHeader
 } from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -19,6 +20,7 @@ export enum DocumentStatusCode
     Valid = "All good",
     NoInput = "Document Empty",
     UnBalanced = "Unbalanced Start and End declarations",
+    UnKnownToken = "Unknown token"
 }
 
 export interface DocumentStatus
@@ -62,7 +64,18 @@ export function validate(text : string) : DocumentStatus
     
     else
     {
-
+        for(let i = 0; i != lines.length; ++i)
+        {
+            let section = findUnknownSectionHeader(layout,lines[i])
+            console.log(section);
+            if(!section)
+            {
+                return {
+                    code : DocumentStatusCode.UnKnownToken,
+                    more : `${lines[i]} at line ${i}`
+                };
+            }
+        }
     }
 
     return {
