@@ -20,7 +20,7 @@ let zeroOne = new ZeroOne();
 
 
 
-it(`should find chapter 1 header`,() => {
+it(`1 should find chapter 1 header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         " "
@@ -30,7 +30,7 @@ it(`should find chapter 1 header`,() => {
 
 });
 
-it(`should find gastro header`,() => {
+it(`2 should find gastro header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -41,7 +41,7 @@ it(`should find gastro header`,() => {
 
 });
 
-it(`should find gastro header`,() => {
+it(`3 should find gastro header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -55,7 +55,7 @@ it(`should find gastro header`,() => {
 
 });
 
-it(`should find chapter 1 header`,() => {
+it(`4 should find chapter 1 header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -73,7 +73,7 @@ it(`should find chapter 1 header`,() => {
 
 });
 
-it(`should find foodborne header`,() => {
+it(`5 should find foodborne header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -85,7 +85,7 @@ it(`should find foodborne header`,() => {
 
 });
 
-it(`should not find anything`,() => {
+it(`6 should not find anything`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -103,7 +103,7 @@ it(`should not find anything`,() => {
 
 });
 
-it(`should not find anything`,() => {
+it(`7 should not find anything`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
         "   Gastroenteritis and Colitis of Infectious Origin Start",
@@ -120,4 +120,23 @@ it(`should not find anything`,() => {
     let res = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
     expect((<ICDSection>res)).toBe(undefined);
 
+});
+
+it(`8 should autocomplete gastro section header`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+            "Gastroenteritis and Colitis of Infectious Origin Start",
+            "    ",    
+            "End",
+            "Gastroenteritis and Colitis of Infectious Origin Start",
+            "    ",
+            "End",
+            "Bacterial Intestinal Infections Start",
+            "   ",
+            "End",
+            "    "
+    ];
+
+    let res = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
+    expect((<ICDSection>res).completionItem.label).toBe(zeroOne.completionItem.label);
 });

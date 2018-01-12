@@ -167,11 +167,11 @@ export function findParentSectionFromLinePosition(
                 continue;
             }
 
-            else if(startToken.regExp.test(doc[i]) && endBlocksEncountered > 0)
+            if(startToken.regExp.test(doc[i]) && endBlocksEncountered > 0)
             {
                 endBlocksEncountered--;
                 if(endBlocksEncountered == 0)
-                --i;
+                    continue;
             }
 
             if(endBlocksEncountered == 0)

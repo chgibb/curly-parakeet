@@ -78,5 +78,5 @@ it(`should autocomplete gastro section header`,() => {
     ].join("\n");
 
     let res : void | monaco.languages.CompletionItem[] = autoComplete(doc);
-    expect((<monaco.languages.CompletionItem[]>res)).toBe(undefined);
+    expect((<monaco.languages.CompletionItem[]>res)[0].label).toBe(gastro.completionItem.label);
 });
