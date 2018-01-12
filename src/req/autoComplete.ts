@@ -5,7 +5,8 @@ import {
     ICDGenericToken,
     ICDCompletionItem,
     findToken,
-    ICDItem
+    ICDItem,
+    findParentSectionFromLinePosition
 } from "./icdToken";
 import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -48,91 +49,21 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
     }
     else
     {
-        lines = lines.reverse();
-        let topHeader : ICDSection;
-        for(let i = 0; i != lines.length; ++i)
+        let closestHeader = findParentSectionFromLinePosition(lines,lines.length-1,getTokenLayout());
+        if(closestHeader)
         {
-            for(let k = 0; k != layout.length; ++k)
+            for(let k = 0; k != (<ICDSection>closestHeader).childSections.length; ++k)
             {
-                if(layout[k].tokenType == "icd11.SectionTopHeader")
-                {
-                    if(layout[k].regExp.test(lines[i]))
-                    {
-                        topHeader = layout[k] as ICDSection;
-                        //console.log(`inside ${topHeader.completionItem.label}`);
-                        break;
-                    }
-                }
+                res.push((<ICDSection>closestHeader).childSections[k].completionItem);
             }
-            if(topHeader!)
-                break;
-        }
-        if(!topHeader)
-            return;
-        else
-        {
-            //console.log(`topHeader is not null`);
-            let endBlocksEncountered = 0;
-            let closestHeader : ICDSection | ICDItem | undefined = undefined;
-            for(let i = 0; i != lines.length; ++i)
+            if((<ICDSection>closestHeader).childItems)
             {
-                //console.log(`inspecting "${lines[i]}"`);
-                if(endToken.regExp.test(lines[i]))
+                for(let k = 0; k != (<ICDSection>closestHeader).childItems.length; ++k)
                 {
-                    endBlocksEncountered++;
-                    if(endBlocksEncountered > starts)
-                    {
-                        return;
-                    }
-                    i++;
-                    while(i != lines.length)
-                    {
-                        if(startToken.regExp.test(lines[i]))
-                        {
-                            endBlocksEncountered--;
-                            if(endBlocksEncountered == 0)
-                            {
-                                //console.log(`ended at ${lines[i]}`);
-                                closestHeader = undefined;
-                                break;
-                            }
-                        }
-                        if(endToken.regExp.test(lines[i]))
-                            endBlocksEncountered++;
-                        i++;
-                    }
-                    //console.log(`walked up to ${lines[i]}`);
-                    continue;
-                }
-                if(closestHeader)
-                {
-                    break;
-                }
-                else
-                {
-                    closestHeader = findToken(topHeader,lines[i]);
-                    //console.log(`method returned`);
-                    //console.log(closestHeader);
-                    if(closestHeader)
-                        break;
-                }
-            }
-            if(closestHeader)
-            {
-                for(let k = 0; k != (<ICDSection>closestHeader).childSections.length; ++k)
-                {
-                    res.push((<ICDSection>closestHeader).childSections[k].completionItem);
-                }
-                if((<ICDSection>closestHeader).childItems)
-                {
-                    for(let k = 0; k != (<ICDSection>closestHeader).childItems.length; ++k)
-                    {
-                        res.push((<ICDSection>closestHeader).childItems[k].completionItem);
-                    }
+                    res.push((<ICDSection>closestHeader).childItems[k].completionItem);
                 }
             }
         }
-        
     }
     return res;
 }
