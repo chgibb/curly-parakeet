@@ -53,9 +53,10 @@ import {buildTokenLayout,buildMonarchTokens} from "./req/treeLayout"
         autoIndent : true
     });
 
-    /*setInterval(function(){
-        document.getElementById("documentStatus")!.innerHTML = validate(editor.getValue());
-    },3000);*/
+    setInterval(function(){
+        let status = validate(editor.getValue());
+        document.getElementById("documentStatus")!.innerHTML = status.code + " " + status.more;
+    },1000);
 
 })().catch((err) => {
     throw err;
