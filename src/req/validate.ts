@@ -4,12 +4,11 @@ import {
     ICDSection,
     ICDGenericToken,
     ICDCompletionItem,
-    findSectionHeader,
-    findUnknownSectionHeader
+    findToken,
+    findTokenFromUnknownStart
 } from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
-import { start } from "repl";
 
 let startToken : Start;
 let endToken : End;
@@ -66,7 +65,7 @@ export function validate(text : string) : DocumentStatus
     {
         for(let i = 0; i != lines.length; ++i)
         {
-            let section = findUnknownSectionHeader(layout,lines[i])
+            let section = findTokenFromUnknownStart(layout,lines[i])
             console.log(section);
             if(!section)
             {

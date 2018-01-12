@@ -70,7 +70,7 @@ export class Start extends ICDGenericToken
     }
 }
 
-export function findUnknownSectionHeader(
+export function findTokenFromUnknownStart(
     rootLayout : Array<ICDGenericToken | ICDSection>,
     line : string
 ) : ICDSection | ICDItem | undefined {
@@ -80,7 +80,7 @@ export function findUnknownSectionHeader(
         console.log(rootLayout[i]);
         console.log(`got`);
 
-        let res = findSectionHeader((<ICDSection>rootLayout[i]),line);
+        let res = findToken((<ICDSection>rootLayout[i]),line);
         console.log(res)
         if(res)
             return res;
@@ -88,16 +88,27 @@ export function findUnknownSectionHeader(
     return undefined;
 }
 
-export function findSectionHeader(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
+export function findToken(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
 {
     let res : ICDSection | ICDItem | undefined = undefined;
+
     if(start.regExp.test(line))
         return start;
+    
+    if(start.childItems)
+    {
+        for(let i = 0; i != start.childItems.length; ++i)
+        {
+            if(start.childItems[i].regExp.test(line))
+                return start.childItems[i];
+        }
+    }
+
     if(start.childSections)
     {
         for(let i = 0; i != start.childSections.length; ++i)
         {
-            res = findSectionHeader(start.childSections[i],line);
+            res = findToken(start.childSections[i],line);
             if(res)
                 return res;
             

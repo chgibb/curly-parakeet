@@ -4,7 +4,7 @@ import {
     ICDSection,
     ICDGenericToken,
     ICDCompletionItem,
-    findSectionHeader,
+    findToken,
     ICDItem
 } from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
@@ -109,7 +109,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
                 }
                 else
                 {
-                    closestHeader = findSectionHeader(topHeader,lines[i]);
+                    closestHeader = findToken(topHeader,lines[i]);
                     //console.log(`method returned`);
                     //console.log(closestHeader);
                     if(closestHeader)
