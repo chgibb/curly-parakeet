@@ -76,12 +76,12 @@ export function findTokenFromUnknownStart(
 ) : ICDSection | ICDItem | undefined {
     for(let i = 0; i != rootLayout.length; ++i)
     {
-        console.log(`passed`);
-        console.log(rootLayout[i]);
-        console.log(`got`);
+        //console.log(`passed`);
+        //console.log(rootLayout[i]);
+        //console.log(`got`);
 
         let res = findToken((<ICDSection>rootLayout[i]),line);
-        console.log(res)
+        //console.log(res)
         if(res)
             return res;
     }
