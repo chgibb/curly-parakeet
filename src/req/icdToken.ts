@@ -70,10 +70,37 @@ export class Start extends ICDGenericToken
     }
 }
 
+export class End extends ICDGenericToken
+{
+    public constructor()
+    {
+        super();
+        this.regExp = /(End)/;
+        this.tokenType = "icd11.End";
+    }
+}
+
+export function trimStartBlockDeclaration(line : string) : string
+{
+    line = line.trim();
+    if(line == "Start")
+        return line;
+    if(
+        line[line.length-1] == "t" && 
+        line[line.length-2] == "r" &&
+        line[line.length-3] == "a" &&
+        line[line.length-4] == "t" &&
+        line[line.length-5] == "S"
+    )
+        return line.substring(0,line.length-5).trim();
+    return line;
+}
+
 export function findTokenFromUnknownStart(
     rootLayout : Array<ICDGenericToken | ICDSection>,
     line : string
 ) : ICDSection | ICDItem | undefined {
+    line = line.trim();
     for(let i = 0; i != rootLayout.length; ++i)
     {
         //console.log(`passed`);
@@ -91,7 +118,7 @@ export function findTokenFromUnknownStart(
 export function findToken(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
 {
     let res : ICDSection | ICDItem | undefined = undefined;
-
+    line = line.trim();
     if(start.regExp.test(line))
         return start;
     
@@ -117,12 +144,3 @@ export function findToken(start : ICDSection,line : string) : ICDSection | ICDIt
     return res;
 }
 
-export class End extends ICDGenericToken
-{
-    public constructor()
-    {
-        super();
-        this.regExp = /(End)/;
-        this.tokenType = "icd11.End";
-    }
-}

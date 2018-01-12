@@ -37,7 +37,14 @@ export function validate(text : string) : DocumentStatus
     if(!layout)
         layout  = buildTokenLayout();
     
-    let lines = text.split(/\r\n|\n\r|\n|\r/g);
+    let inLines = text.split(/\r\n|\n\r|\n|\r/g);
+    let lines : Array<string> = new Array<string>();
+
+    for(let i = 0; i != inLines.length; ++i)
+    {
+        if(inLines[i].trim().length != 0)
+            lines.push(inLines[i]);
+    }
 
     let starts = 0;
     let ends = 0;
@@ -65,6 +72,7 @@ export function validate(text : string) : DocumentStatus
     {
         for(let i = 0; i != lines.length; ++i)
         {
+            console.log(lines[i]);
             let section = findTokenFromUnknownStart(layout,lines[i])
             console.log(section);
             if(!section)
