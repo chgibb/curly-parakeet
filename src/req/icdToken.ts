@@ -115,7 +115,10 @@ export function findTokenFromUnknownStart(
     return undefined;
 }
 
-export function findToken(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
+export function findToken(
+    start : ICDSection,
+    line : string
+) : ICDSection | ICDItem |undefined
 {
     let res : ICDSection | ICDItem | undefined = undefined;
     line = trimStartBlockDeclaration(line);
@@ -144,3 +147,43 @@ export function findToken(start : ICDSection,line : string) : ICDSection | ICDIt
     return res;
 }
 
+export function findParentSectionFromLinePosition(
+    doc : Array<string>,
+    startLine : number,
+    layout : Array<ICDSection | ICDGenericToken>
+) : ICDSection | undefined
+{
+    let res : ICDSection | undefined = undefined;
+
+    let startToken = new Start();
+    let endToken = new End();
+
+    let endBlocksEncountered = 0;
+
+    for(let i = startLine; i > -1; --i)
+    {
+        if(endToken.regExp.test(doc[i]))
+        {
+            endBlocksEncountered++;
+            continue;
+        }
+
+        else if(startToken.regExp.test(doc[i]) && endBlocksEncountered > 0)
+        {
+            endBlocksEncountered--;
+        }
+
+        if(endBlocksEncountered == 0)
+        {
+            let possible = findTokenFromUnknownStart(layout,doc[i]);
+            if(possible)
+            {
+                if(possible.tokenType == "icd11.SectionHeader" || possible.tokenType == "icd11.SectionTopHeader")
+                {
+                    return (<ICDSection>possible);
+                }
+            }
+        }
+    }
+    return res;
+}
