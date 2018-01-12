@@ -4,6 +4,7 @@ import {
     ICDSection,
     ICDGenericToken,
     ICDCompletionItem,
+    trimStartBlockDeclaration,
     findToken,
     findTokenFromUnknownStart
 } from "./icdToken";
@@ -65,6 +66,7 @@ export function validate(text : string) : DocumentStatus
     {
         for(let i = 0; i != lines.length; ++i)
         {
+            lines[i] = lines[i].trim();
             console.log(lines[i]);
             let section = findTokenFromUnknownStart(layout,lines[i])
             console.log(section);
@@ -72,7 +74,7 @@ export function validate(text : string) : DocumentStatus
             {
                 return {
                     code : DocumentStatusCode.UnKnownToken,
-                    more : `${lines[i]} at line ${i+1}`
+                    more : `${trimStartBlockDeclaration(lines[i])} at line ${i+1}`
                 };
             }
         }
