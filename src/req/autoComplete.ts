@@ -4,7 +4,8 @@ import {
     ICDSection,
     ICDGenericToken,
     ICDCompletionItem,
-    findSectionHeader
+    findSectionHeader,
+    ICDItem
 } from "./icdToken";
 import {buildTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -71,7 +72,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         {
             //console.log(`topHeader is not null`);
             let endBlocksEncountered = 0;
-            let closestHeader : ICDSection | undefined = undefined;
+            let closestHeader : ICDSection | ICDItem | undefined = undefined;
             for(let i = 0; i != lines.length; ++i)
             {
                 //console.log(`inspecting "${lines[i]}"`);
@@ -117,15 +118,15 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
             }
             if(closestHeader)
             {
-                for(let k = 0; k != closestHeader.childSections.length; ++k)
+                for(let k = 0; k != (<ICDSection>closestHeader).childSections.length; ++k)
                 {
-                    res.push(closestHeader.childSections[k].completionItem);
+                    res.push((<ICDSection>closestHeader).childSections[k].completionItem);
                 }
-                if(closestHeader.childItems)
+                if((<ICDSection>closestHeader).childItems)
                 {
-                    for(let k = 0; k != closestHeader.childItems.length; ++k)
+                    for(let k = 0; k != (<ICDSection>closestHeader).childItems.length; ++k)
                     {
-                        res.push(closestHeader.childItems[k].completionItem);
+                        res.push((<ICDSection>closestHeader).childItems[k].completionItem);
                     }
                 }
             }

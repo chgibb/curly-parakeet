@@ -73,7 +73,7 @@ export class Start extends ICDGenericToken
 export function findUnknownSectionHeader(
     rootLayout : Array<ICDGenericToken | ICDSection>,
     line : string
-) : ICDSection | undefined {
+) : ICDSection | ICDItem | undefined {
     for(let i = 0; i != rootLayout.length; ++i)
     {
         console.log(`passed`);
@@ -88,9 +88,9 @@ export function findUnknownSectionHeader(
     return undefined;
 }
 
-export function findSectionHeader(start : ICDSection,line : string) : ICDSection | undefined
+export function findSectionHeader(start : ICDSection,line : string) : ICDSection | ICDItem |undefined
 {
-    let res : ICDSection | undefined = undefined;
+    let res : ICDSection | ICDItem | undefined = undefined;
     if(start.regExp.test(line))
         return start;
     if(start.childSections)
