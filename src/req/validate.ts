@@ -72,7 +72,7 @@ export function validate(text : string) : DocumentStatus
             {
                 return {
                     code : DocumentStatusCode.UnKnownToken,
-                    more : `${lines[i]} at line ${i}`
+                    more : `${lines[i]} at line ${i+1}`
                 };
             }
         }

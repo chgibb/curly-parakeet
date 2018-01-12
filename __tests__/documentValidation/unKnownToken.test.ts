@@ -13,6 +13,6 @@ it(`should be unknowntoken`,() => {
     let res : DocumentStatus = validate(doc);
 
     expect(res.code).toBe(DocumentStatusCode.UnKnownToken);
-    expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases Start at line 0`)
+    expect(res.more).toBe(`01 Certain Infectios or Parasitic Diseases Start at line 1`)
 
 });
