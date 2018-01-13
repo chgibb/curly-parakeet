@@ -6,7 +6,8 @@ import {
     ICDCompletionItem,
     trimStartBlockDeclaration,
     findToken,
-    findTokenFromUnknownStart
+    findTokenFromUnknownStart,
+    findParentSectionFromLinePosition
 } from "./icdToken";
 import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -19,7 +20,8 @@ export enum DocumentStatusCode
     Valid = 0,
     NoInput = 1,
     UnBalanced = 2,
-    UnKnownToken = 3
+    UnKnownToken = 3,
+    UnExpectedToken = 4
 }
 
 export interface DocumentStatus
@@ -68,12 +70,24 @@ export function validate(text : string) : DocumentStatus
                 continue;
             lines[i] = lines[i].trim();
             let section = findTokenFromUnknownStart(layout,lines[i]);
+            //token does not exist anywhere in the expected AST layout
             if(!section)
             {
                 return {
                     code : DocumentStatusCode.UnKnownToken,
                     more : `Unknown token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
                 };
+            }
+            else
+            {
+                let parent = findParentSectionFromLinePosition(lines,i,layout);
+                if(parent && parent.completionItem.label != section.completionItem.label)
+                {
+                    return {
+                        code : DocumentStatusCode.UnExpectedToken,
+                        more : `Unexpected token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1} in section "${section.completionItem.label}"`
+                    }
+                }
             }
         }
     }
