@@ -30,6 +30,25 @@ it(`1 should find chapter 1 header`,() => {
 
 });
 
+it(`should find chapter 1 header`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+    ];
+    let res = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
+    expect((<ICDSection>res)).toBe(undefined);
+
+});
+
+it(`1 should find chapter 1 header`,() => {
+    let doc = [
+        "01 Certain Infectious or Parasitic Diseases Start",
+        "   Gastroenteritis and Colitis of Infectious Origin Start",
+    ];
+    let res = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
+    expect((<ICDSection>res).completionItem.label).toBe(zeroOne.completionItem.label);
+
+});
+
 it(`2 should find gastro header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",

@@ -173,7 +173,7 @@ export function findParentSectionFromLinePosition(
                     continue;
             }
 
-            if(endBlocksEncountered == 0)
+            if(endBlocksEncountered == 0 && i != startLine)
             {
                 let possible = findTokenFromUnknownStart(layout,doc[i]);
                 if(possible)
