@@ -11,6 +11,5 @@ it(`should be unexpected token`,() => {
     ].join("\n");
 
     let res : DocumentStatus = validate(doc);
-    //expect(0).toBe(0);
     expect(res.code).toBe(DocumentStatusCode.UnExpectedToken);
 });
