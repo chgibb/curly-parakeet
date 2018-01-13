@@ -31,7 +31,7 @@ export class ICDGenericToken
     public tokenType : ICDTokenID;
 }
 
-class ICDAttributes extends ICDGenericToken
+export class ICDAttributes extends ICDGenericToken
 {
     public description : string;
     public completionItem : ICDCompletionItem;
