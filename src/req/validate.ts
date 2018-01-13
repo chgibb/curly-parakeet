@@ -69,7 +69,10 @@ export function validate(text : string) : DocumentStatus
             if(lines[i].trim().length == 0)
                 continue;
             lines[i] = lines[i].trim();
+            //console.log("input")
+            //console.log(lines[i]);
             let section = findTokenFromUnknownStart(layout,lines[i]);
+            //console.log(section);
             //token does not exist anywhere in the expected AST layout
             if(!section)
             {
@@ -81,7 +84,12 @@ export function validate(text : string) : DocumentStatus
             else if(section.tokenType != "icd11.Start" && section.tokenType != "icd11.End")
             {
                 let parent = findParentSectionFromLinePosition(lines,i,layout);
-                if(parent && parent.completionItem.label != section.completionItem.label)
+                //console.log("found parent");
+                //console.log(parent);
+                //console.log(lines);
+                //console.log(parent);
+                //console.log(section);
+                if(parent && parent.completionItem.label != section.parent!.completionItem.label)
                 {
                     return {
                         code : DocumentStatusCode.UnExpectedToken,
