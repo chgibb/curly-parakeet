@@ -32,13 +32,21 @@ function getNestedMonarchTokens(
     start : ICDGenericToken | ICDSection,
     res : Array<{[name : number] : RegExp | string}>
 ) : void {
-    res.push([start.regExp,start.tokenType]);
+    res.push([
+        start.regExp,
+        start.tokenType,
+        (<ICDSection>start).completionItem ?  (<ICDSection>start).completionItem.label : ""
+    ]);
 
     if((<ICDSection>start).childItems)
     {
         for(let i = 0; i != (<ICDSection>start).childItems.length; ++i)
         {
-            res.push([(<ICDSection>start).childItems[i].regExp,(<ICDSection>start).childItems[i].tokenType]);
+            res.push([
+                (<ICDSection>start).childItems[i].regExp,
+                (<ICDSection>start).childItems[i].tokenType,
+                (<ICDSection>start).childItems[i].completionItem.label
+            ]);
         }
     }
 
