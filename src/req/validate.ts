@@ -78,7 +78,7 @@ export function validate(text : string) : DocumentStatus
                     more : `Unknown token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
                 };
             }
-            else
+            else if(section.tokenType != "icd11.Start" && section.tokenType != "icd11.End")
             {
                 let parent = findParentSectionFromLinePosition(lines,i,layout);
                 if(parent && parent.completionItem.label != section.completionItem.label)
