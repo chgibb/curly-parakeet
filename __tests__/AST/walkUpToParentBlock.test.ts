@@ -4,9 +4,12 @@ import {
     Start,
     End,
     ICDSection,
-    findParentSectionFromLinePosition
+    ICDItem,
+    ICDAttributes,
+    findParentSectionFromLinePosition,
+    findTokenFromUnknownStart
 } from "./../../src/req/icdToken";
-import {getTokenLayout} from "./../../src//req/treeLayout";
+import {getTokenLayout, buildMonarchTokens} from "./../../src//req/treeLayout";
 import {ZeroOne} from "./../../src/req/sections/01";
 import {Gastro} from "./../../src/req/sections/01/gastro";
 import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
@@ -159,3 +162,33 @@ it(`8 should find gastro section header`,() => {
     let res = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
     expect((<ICDSection>res).completionItem.label).toBe(zeroOne.completionItem.label);
 });
+
+let tokens = buildMonarchTokens(getTokenLayout(),true);
+for(let i = 0; i != tokens.length; ++i)
+{
+    it(`should find the immediate parent for "${tokens[i][2]}"`,() => {
+        if((<string>tokens[i][2]))
+        {
+            let res : ICDSection | ICDItem | undefined = findTokenFromUnknownStart(getTokenLayout(),(<string>tokens[i][2]));
+            let current : ICDAttributes = res!;
+            let doc : Array<string> = new Array<string>();
+            
+            //assemble a document consisting of all of the parent sections leading to token[i]
+            doc.push(" ");
+            if(current.parent)
+            {
+                while(current.parent)
+                {
+                    doc.push(current.parent.completionItem.label+" Start");
+                    current = current.parent;
+                }
+            }
+            //flip upside down, into the right order
+            doc = doc.reverse();
+
+            //should walk up the document and find the parent of tokens[i]
+            let foundParent = findParentSectionFromLinePosition(doc,doc.length-1,getTokenLayout());
+            expect(foundParent).toEqual(res!.parent);
+        }
+    });
+}
