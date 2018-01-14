@@ -141,7 +141,7 @@ it(`7 should not find anything`,() => {
 
 });
 
-it(`8 should autocomplete gastro section header`,() => {
+it(`8 should find gastro section header`,() => {
     let doc = [
         "01 Certain Infectious or Parasitic Diseases Start",
             "Gastroenteritis and Colitis of Infectious Origin Start",
