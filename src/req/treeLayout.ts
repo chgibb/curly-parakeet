@@ -17,25 +17,27 @@ export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
 }
 
 export function buildMonarchTokens(
-    layout : Array<ICDGenericToken | ICDSection>
+    layout : Array<ICDGenericToken | ICDSection>,
+    extended : boolean
 ) : Array<{[name : number] : RegExp | string}> {
     let res = new Array<{[name : number] : RegExp | string}>();
     
     for(let i = 0; i != layout.length; ++i)
     {
-        getNestedMonarchTokens(layout[i],res);
+        getNestedMonarchTokens(layout[i],res,extended);
     }
     return res;
 }
 
 function getNestedMonarchTokens(
     start : ICDGenericToken | ICDSection,
-    res : Array<{[name : number] : RegExp | string}>
+    res : Array<{[name : number] : RegExp | string}>,
+    extended : boolean
 ) : void {
     res.push([
         start.regExp,
         start.tokenType,
-        (<ICDSection>start).completionItem ?  (<ICDSection>start).completionItem.label : ""
+        extended ? ((<ICDSection>start).completionItem ?  (<ICDSection>start).completionItem.label : "") : ""
     ]);
 
     if((<ICDSection>start).childItems)
@@ -45,7 +47,7 @@ function getNestedMonarchTokens(
             res.push([
                 (<ICDSection>start).childItems[i].regExp,
                 (<ICDSection>start).childItems[i].tokenType,
-                (<ICDSection>start).childItems[i].completionItem.label
+                extended ? ((<ICDSection>start).completionItem ?  (<ICDSection>start).completionItem.label : "") : ""
             ]);
         }
     }
@@ -54,7 +56,7 @@ function getNestedMonarchTokens(
     {
         for(let i = 0; i != (<ICDSection>start).childSections.length; ++i)
         {
-            getNestedMonarchTokens((<ICDSection>start).childSections[i],res);
+            getNestedMonarchTokens((<ICDSection>start).childSections[i],res,extended);
         }
     }
 }

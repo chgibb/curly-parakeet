@@ -3,7 +3,7 @@
 import {findTokenFromUnknownStart,findToken, ICDSection, ICDItem} from "./../../src/req/icdToken";
 import {getTokenLayout,buildMonarchTokens} from "./../../src/req/treeLayout";
 
-let tokens = buildMonarchTokens(getTokenLayout());
+let tokens = buildMonarchTokens(getTokenLayout(),true);
 for(let i = 0; i != tokens.length; ++i)
 {
     //ensure every token in the AST layout is actually reachable

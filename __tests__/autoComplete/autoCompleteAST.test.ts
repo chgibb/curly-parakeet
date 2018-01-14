@@ -5,7 +5,7 @@ import {getTokenLayout,buildMonarchTokens} from "./../../src/req/treeLayout";
 import {autoComplete} from "./../../src/req/autoComplete";
 import {ICDTokenID} from "../../src/req/icdTokenID";
 
-let tokens = buildMonarchTokens(getTokenLayout());
+let tokens = buildMonarchTokens(getTokenLayout(),true);
 for(let i = 0; i != tokens.length; ++i)
 {
     //ensure every token in the AST layout is actually reachable

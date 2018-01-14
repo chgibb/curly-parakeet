@@ -17,7 +17,7 @@ import {getTokenLayout,buildMonarchTokens} from "./req/treeLayout"
 
     monaco.languages.setMonarchTokensProvider('icd11Language', <monaco.languages.IMonarchLanguage>{
         tokenizer : {
-            root : buildMonarchTokens(getTokenLayout())
+            root : buildMonarchTokens(getTokenLayout(),false)
         },
         tokenPostfix : "."
     });
