@@ -1,6 +1,7 @@
 import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
 import {$1A10} from "./1A10";
 import {$1A12} from "./1A12";
+import {$1A13} from "./1A13";
 
 export class FoodBorne extends ICDSection
 {
@@ -18,5 +19,6 @@ export class FoodBorne extends ICDSection
         this.childItems = new Array<ICDItem>();
         this.childItems.push(new $1A10(this));
         this.childItems.push(new $1A12(this));
+        this.childItems.push(new $1A13(this));
     }
 }
