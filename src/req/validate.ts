@@ -21,7 +21,8 @@ export enum DocumentStatusCode
     NoInput = 1,
     UnBalanced = 2,
     UnKnownToken = 3,
-    UnExpectedToken = 4
+    UnExpectedToken = 4,
+    DuplicateToken = 5
 }
 
 export interface DocumentStatus
@@ -102,6 +103,23 @@ export function validate(text : string) : DocumentStatus
                     return {
                         code : DocumentStatusCode.UnExpectedToken,
                         more : `at line ${i+1}: "${trimStartBlockDeclaration(lines[i])}" is not a chapter`
+                    }
+                }
+                {
+                    let found = 0;
+                    for(let k = 0; k != lines.length; ++k)
+                    {
+                        if(section.regExp.test(lines[k].trim()))
+                        {
+                            found++;
+                        }
+                        if(found > 1)
+                        {
+                            return {
+                                code : DocumentStatusCode.DuplicateToken,
+                                more : `Duplicate token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
+                            }
+                        }
                     }
                 }
             }
