@@ -81,6 +81,7 @@ export function validate(text : string) : DocumentStatus
                     more : `Unknown token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
                 };
             }
+
             else if(section.tokenType != "icd11.Start" && section.tokenType != "icd11.End")
             {
                 let parent = findParentSectionFromLinePosition(lines,i,layout);
@@ -94,6 +95,13 @@ export function validate(text : string) : DocumentStatus
                     return {
                         code : DocumentStatusCode.UnExpectedToken,
                         more : `Unexpected token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1} in section "${section.completionItem.label}"`
+                    }
+                }
+                else if(section.tokenType != "icd11.SectionTopHeader" && section.parent && !parent)
+                {
+                    return {
+                        code : DocumentStatusCode.UnExpectedToken,
+                        more : `at line ${i+1}: "${trimStartBlockDeclaration(lines[i])}" is not a chapter`
                     }
                 }
             }
