@@ -13,7 +13,14 @@ import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
-
+/**
+ * Returns an array of auto completion items for the given text snippet.
+ * text does not have to be a fully completed and validated document
+ * 
+ * @export
+ * @param {string} text 
+ * @returns {(Array<ICDCompletionItem> | void)} 
+ */
 export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
     //console.log(`input string: "${text}"`);

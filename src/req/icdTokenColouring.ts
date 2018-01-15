@@ -3,11 +3,24 @@
 
 import {ICDTokenID} from "./icdTokenID";
 
+/**
+ * Adds properties to monaco's token themeing rules
+ * 
+ * @export
+ * @interface ICDTokenThemeRule
+ * @extends {monaco.editor.ITokenThemeRule}
+ */
 export interface ICDTokenThemeRule extends monaco.editor.ITokenThemeRule
 {
     token : ICDTokenID;
 }  
 
+/**
+ * Returns all themeing rules used 
+ * 
+ * @export
+ * @returns {Array<ICDTokenThemeRule>} 
+ */
 export function getICDTokenColouring() : Array<ICDTokenThemeRule>
 {
     let res : Array<ICDTokenThemeRule> = new Array<ICDTokenThemeRule>();

@@ -24,13 +24,24 @@ export enum CompletionItemKind
     Variable = 5,
     Class = 6
 }
-
+/**
+ * Base token class
+ * 
+ * @export
+ * @class ICDGenericToken
+ */
 export class ICDGenericToken
 {
     public regExp : RegExp;
     public tokenType : ICDTokenID;
 }
-
+/**
+ * Base token attributes
+ * 
+ * @export
+ * @class ICDAttributes
+ * @extends {ICDGenericToken}
+ */
 export class ICDAttributes extends ICDGenericToken
 {
     public description : string;
@@ -38,6 +49,13 @@ export class ICDAttributes extends ICDGenericToken
     public parent : ICDAttributes | undefined;
 }
 
+/**
+ * Represents the beginning of an ICD section
+ * 
+ * @export
+ * @class ICDSection
+ * @extends {ICDAttributes}
+ */
 export class ICDSection extends ICDAttributes
 {
     public childSections : Array<ICDSection>;
@@ -52,6 +70,13 @@ export class ICDSection extends ICDAttributes
     }
 }
 
+/**
+ * Represents an individual ICD code, contained within a section
+ * 
+ * @export
+ * @class ICDItem
+ * @extends {ICDAttributes}
+ */
 export class ICDItem extends ICDAttributes
 {
     public rawCode : string;
@@ -63,6 +88,13 @@ export class ICDItem extends ICDAttributes
     }
 }
 
+/**
+ * Start block declaration for beginning ICD sections
+ * 
+ * @export
+ * @class Start
+ * @extends {ICDGenericToken}
+ */
 export class Start extends ICDGenericToken
 {
     public constructor()
@@ -73,6 +105,13 @@ export class Start extends ICDGenericToken
     }
 }
 
+/**
+ * End block declaration for ending ICD sections
+ * 
+ * @export
+ * @class End
+ * @extends {ICDGenericToken}
+ */
 export class End extends ICDGenericToken
 {
     public constructor()
@@ -83,6 +122,13 @@ export class End extends ICDGenericToken
     }
 }
 
+/**
+ * Trim off the Start block declaration from the given line
+ * 
+ * @export
+ * @param {string} line 
+ * @returns {string} 
+ */
 export function trimStartBlockDeclaration(line : string) : string
 {
     line = line.trim();
@@ -99,6 +145,14 @@ export function trimStartBlockDeclaration(line : string) : string
     return line;
 }
 
+/**
+ * Determine if the token in line exists in the AST layout given by rootLayout
+ * 
+ * @export
+ * @param {(Array<ICDGenericToken | ICDSection>)} rootLayout 
+ * @param {string} line 
+ * @returns {(ICDSection | ICDItem | undefined)} 
+ */
 export function findTokenFromUnknownStart(
     rootLayout : Array<ICDGenericToken | ICDSection>,
     line : string
@@ -113,7 +167,14 @@ export function findTokenFromUnknownStart(
     }
     return undefined;
 }
-
+/**
+ * Determine if the token in line exists in the section start
+ * 
+ * @export
+ * @param {ICDSection} start 
+ * @param {string} line 
+ * @returns {(ICDSection | ICDItem |undefined)} 
+ */
 export function findToken(
     start : ICDSection,
     line : string
@@ -146,6 +207,16 @@ export function findToken(
     return res;
 }
 
+/**
+ * Find the parent section of the given line given by startLine in the document doc, using 
+ * layout to validate possibilities
+ * 
+ * @export
+ * @param {Array<string>} doc 
+ * @param {number} startLine 
+ * @param {(Array<ICDSection | ICDGenericToken>)} layout 
+ * @returns {(ICDSection | undefined)} 
+ */
 export function findParentSectionFromLinePosition(
     doc : Array<string>,
     startLine : number,

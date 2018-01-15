@@ -4,6 +4,12 @@ import {ZeroOne} from "./sections/01";
 
 let tokenLayout : Array<ICDGenericToken | ICDSection>;
 
+/**
+ * Returns the valid AST layout for any given document
+ * 
+ * @export
+ * @returns {(Array<ICDGenericToken | ICDSection>)} 
+ */
 export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
 {
     if(!tokenLayout)
@@ -16,6 +22,16 @@ export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
     return tokenLayout;
 }
 
+/**
+ * Flatten the given AST layout into tokens consumable by Monarch's themeing engine.
+ * extended determines wether or not to extend the returned tokens with additional, 
+ * non standard (and Monarch incompatible) indices
+ * 
+ * @export
+ * @param {(Array<ICDGenericToken | ICDSection>)} layout 
+ * @param {boolean} extended 
+ * @returns {(Array<{[name : number] : RegExp | string}>)} 
+ */
 export function buildMonarchTokens(
     layout : Array<ICDGenericToken | ICDSection>,
     extended : boolean
