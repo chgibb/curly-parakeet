@@ -1,6 +1,7 @@
 import {ICDSection,CompletionItemKind} from "./../../icdToken";
 import {Bacterial} from "./bacterial";
 import {FoodBorne} from "./foodBorne";
+import {Intestinal} from "./intestinal";
 
 export class Gastro extends ICDSection
 {
@@ -17,5 +18,6 @@ export class Gastro extends ICDSection
         };
         this.childSections.push(new Bacterial(this));
         this.childSections.push(new FoodBorne(this));
+        this.childSections.push(new Intestinal(this));
     }
 }
