@@ -1,5 +1,7 @@
 import {ICDSection,CompletionItemKind} from "./../icdToken";
 
+import {BrainOrCentralNervousSystem} from "./02/brainOrCentralNervousSystem";
+
 export class $02 extends ICDSection
 {
     public constructor()
@@ -13,6 +15,6 @@ export class $02 extends ICDSection
             documentation : "",
             insertText : `02 Neoplasms Start${"\n"}   ${"\n"}End`
         };
-        
+        this.childSections.push(new BrainOrCentralNervousSystem(this));
     }
 }
