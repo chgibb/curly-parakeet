@@ -1,6 +1,7 @@
 import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
 
 import {$1A00} from "./1A00";
+import {$1A01} from "./1A01";
 
 export class Intestinal extends ICDSection
 {
@@ -19,5 +20,6 @@ export class Intestinal extends ICDSection
         this.childItems = new Array<ICDItem>();
 
         this.childItems.push(new $1A00(this));
+        this.childItems.push(new $1A01(this));
     }
 }
