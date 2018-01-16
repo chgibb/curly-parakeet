@@ -1,9 +1,9 @@
 /// <reference types="ts-jest" />
 
 import {autoComplete} from "./../../src/req/autoComplete";
-import {ZeroOne} from "./../../src/req/sections/01";
+import {$01} from "./../../src/req/sections/01";
 
-let zeroOne = new ZeroOne();
+let zeroOne = new $01();
 
 it(`should auto complete chapter 1 top header`,() => {
     let res : void | monaco.languages.CompletionItem[] = autoComplete("c");

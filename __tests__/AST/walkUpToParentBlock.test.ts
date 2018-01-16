@@ -10,16 +10,16 @@ import {
     findTokenFromUnknownStart
 } from "./../../src/req/icdToken";
 import {getTokenLayout, buildMonarchTokens} from "./../../src//req/treeLayout";
-import {ZeroOne} from "./../../src/req/sections/01";
+import {$01} from "./../../src/req/sections/01";
 import {Gastro} from "./../../src/req/sections/01/gastro";
 import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
 
-let zerOne = new ZeroOne();
+let zerOne = new $01();
 
 let gastro = new Gastro(undefined);
 let foodBorne = new FoodBorne(undefined);
 
-let zeroOne = new ZeroOne();
+let zeroOne = new $01();
 
 
 

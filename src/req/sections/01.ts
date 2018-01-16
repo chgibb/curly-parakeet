@@ -1,6 +1,6 @@
 import {ICDSection,CompletionItemKind} from "./../icdToken";
 import {Gastro} from "./01/gastro";
-export class ZeroOne extends ICDSection
+export class $01 extends ICDSection
 {
     public constructor()
     {
