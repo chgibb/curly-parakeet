@@ -1,7 +1,7 @@
 import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
 
 import {$1A20} from "./1A20";
-import {$1A12} from "./1A12";
+import {$1A21} from "./1A21";
 import {$1A22} from "./1A22";
 
 export class ViralIntestinal extends ICDSection
@@ -20,7 +20,7 @@ export class ViralIntestinal extends ICDSection
         this.childItems = new Array<ICDItem>();
 
         this.childItems.push(new $1A20(this));
-        this.childItems.push(new $1A12(this));
+        this.childItems.push(new $1A21(this));
         this.childItems.push(new $1A22(this));
     }
 }
