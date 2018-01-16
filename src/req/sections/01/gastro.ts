@@ -1,5 +1,5 @@
 import {ICDSection,CompletionItemKind} from "./../../icdToken";
-import {Bacterial} from "./bacterial";
+import {ViralIntestinal} from "./viralIntestinal";
 import {FoodBorne} from "./foodBorne";
 import {BacterialIntestinal} from "./bacterialIntestinal";
 
@@ -16,7 +16,7 @@ export class Gastro extends ICDSection
             documentation : "Any condition of the intestines, caused by an infection with a bacterial source.",
             insertText : `Gastroenteritis and Colitis of Infectious Origin Start${"\n"}    ${"\n"}End`
         };
-        this.childSections.push(new Bacterial(this));
+        this.childSections.push(new ViralIntestinal(this));
         this.childSections.push(new FoodBorne(this));
         this.childSections.push(new BacterialIntestinal(this));
     }
