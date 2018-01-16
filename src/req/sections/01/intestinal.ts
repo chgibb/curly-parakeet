@@ -1,4 +1,6 @@
-import {ICDSection,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
+
+import {$1A00} from "./1A00";
 
 export class Intestinal extends ICDSection
 {
@@ -13,5 +15,9 @@ export class Intestinal extends ICDSection
             documentation : "Any condition of the intestines, caused by an infection with a viral source.",
             insertText : `Viral intestinal infections Start${"\n"}    ${"\n"}End`
         }
+
+        this.childItems = new Array<ICDItem>();
+
+        this.childItems.push(new $1A00(this));
     }
 }
