@@ -4,7 +4,7 @@ import {$1A00} from "./1A00";
 import {$1A01} from "./1A01";
 import {$1A02} from "./1A02";
 
-export class Intestinal extends ICDSection
+export class BacterialIntestinal extends ICDSection
 {
     public constructor(parent : ICDSection | undefined)
     {
