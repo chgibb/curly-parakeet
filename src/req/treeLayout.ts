@@ -1,6 +1,7 @@
 import {ICDTokenID} from "./icdTokenID";
 import {ICDItem,ICDGenericToken,Start,End,ICDSection} from "./icdToken"
 import {ZeroOne} from "./sections/01";
+import {$02} from "./sections/02";
 
 let tokenLayout : Array<ICDGenericToken | ICDSection>;
 
@@ -16,6 +17,7 @@ export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
     {
         tokenLayout = new Array<ICDGenericToken | ICDSection>();
         tokenLayout.push(new ZeroOne());
+        tokenLayout.push(new $02());
         tokenLayout.push(new Start());
         tokenLayout.push(new End());
     }
