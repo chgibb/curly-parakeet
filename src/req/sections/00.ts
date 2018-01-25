@@ -1,6 +1,7 @@
 import {ICDSection,CompletionItemKind,ICDItem} from "./../icdToken";
 import {$FirstName} from "./00/firstName";
 import {$LastName} from "./00/lastName";
+import {$DateofBirth} from "./00/dateOfBirth";
 import {$Age} from "./00/age";
 
 export class $00 extends ICDSection
@@ -20,6 +21,7 @@ export class $00 extends ICDSection
 
         this.childItems.push(new $FirstName(this));
         this.childItems.push(new $LastName(this));
+        this.childItems.push(new $DateofBirth(this));
         this.childItems.push(new $Age(this));
     }
 }
