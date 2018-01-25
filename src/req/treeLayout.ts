@@ -1,5 +1,6 @@
 import {ICDTokenID} from "./icdTokenID";
-import {ICDItem,ICDGenericToken,Start,End,ICDSection} from "./icdToken"
+import {ICDItem,ICDGenericToken,Start,End,ICDSection} from "./icdToken";
+import {$00} from "./sections/00";
 import {$01} from "./sections/01";
 import {$02} from "./sections/02";
 
@@ -16,6 +17,7 @@ export function getTokenLayout() : Array<ICDGenericToken | ICDSection>
     if(!tokenLayout)
     {
         tokenLayout = new Array<ICDGenericToken | ICDSection>();
+        tokenLayout.push(new $00());
         tokenLayout.push(new $01());
         tokenLayout.push(new $02());
         tokenLayout.push(new Start());
