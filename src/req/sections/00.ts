@@ -2,7 +2,9 @@ import {ICDSection,CompletionItemKind,ICDItem} from "./../icdToken";
 import {$FirstName} from "./00/firstName";
 import {$LastName} from "./00/lastName";
 import {$DateofBirth} from "./00/dateOfBirth";
+import {$Address} from "./00/address";
 import {$SocialInsuranceNumber} from "./00/socialInsuranceNumber";
+import {$HealthCareNumber} from "./00/healthCareNumber";
 
 export class $00 extends ICDSection
 {
@@ -22,6 +24,8 @@ export class $00 extends ICDSection
         this.childItems.push(new $FirstName(this));
         this.childItems.push(new $LastName(this));
         this.childItems.push(new $DateofBirth(this));
+        this.childItems.push(new $Address(this));
         this.childItems.push(new $SocialInsuranceNumber(this));
+        this.childItems.push(new $HealthCareNumber(this));
     }
 }
