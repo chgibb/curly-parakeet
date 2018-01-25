@@ -1,17 +1,17 @@
 import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
 
-export class $FirstName extends ICDItem
+export class $LastName extends ICDItem
 {
     public constructor(parent : ICDSection | undefined)
     {
         super(parent);
-        this.regExp = /(First Name:)/;
+        this.regExp = /(Last Name:)/;
         this.tokenType = "icd11.item";
         this.completionItem = {
-            label : "First Name",
+            label : "Last Name",
             kind : CompletionItemKind.Function,
-            documentation : "The first name of the patient.",
-            insertText : "- First Name: "
+            documentation : "The last name of the patient.",
+            insertText : "- Last Name: "
         };
     }
 }
