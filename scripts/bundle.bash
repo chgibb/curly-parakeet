@@ -27,6 +27,7 @@ printf "Done\n"
 
 mkdir dist
 mkdir dist/vs
+mkdir dist/img
 
 printf "Bundling entry points\n"
 for f in src/*.js
@@ -47,6 +48,15 @@ do
     destination=$(echo $f | awk '{gsub("src/","dist/");print}')
     cp $f $destination
 done
+
+printf "Copying images\n"
+
+for f in img/*.png
+do
+    destination=$(echo $f | awk '{gsub("img/","dist/img/");print}')
+    cp $f $destination
+done
+
 printf "Done\n"
 
 cp -R node_modules/monaco-editor/dev/vs/** dist/vs
