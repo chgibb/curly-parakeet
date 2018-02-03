@@ -50,7 +50,9 @@ import {getTokenLayout,buildMonarchTokens} from "./req/treeLayout"
         theme: 'icd11Theme',
         value: "",
         language: 'icd11Language',
-        autoIndent : true
+        autoIndent : true,
+        folding : true,
+        
     });
 
     setInterval(function(){
