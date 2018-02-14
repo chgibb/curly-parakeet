@@ -18,8 +18,8 @@
     "url": "https://github.com/chgibb/curly-parakeet/issues"
   },
   "homepage": "https://github.com/chgibb/curly-parakeet#readme",
-  "jest" : {
-    "bail" : true
+  "jest": {
+    "bail": true
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.3",
@@ -31,6 +31,6 @@
     "jsdom": "^11.5.1",
     "monaco-editor": "^0.10.1",
     "ts-jest": "^22.0.1",
-    "typescript": "^2.6.2"
+    "typescript": "^2.7.1"
   }
 }
