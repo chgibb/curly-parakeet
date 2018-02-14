@@ -6,7 +6,7 @@ import {validate} from "./validate";
 import {autoComplete} from "./autoComplete";
 import {getICDTokenColouring} from "./icdTokenColouring";
 import {getTokenLayout,buildMonarchTokens} from "./treeLayout"
-import { error } from "util";
+import {buildDocumentAST} from "./documentAST";
 
 let errorMonitor : NodeJS.Timer;
 
@@ -72,6 +72,10 @@ export function loadICDEditor(div : HTMLElement | null,errorOutput : HTMLElement
         errorMonitor = setInterval(function(){
             let status = validate(editor.getValue());
             document.getElementById(errorOutput.id)!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
+            if(status.code == 0)
+            {
+                console.log(buildDocumentAST(editor.getValue()));
+            }
         },1000);
 
         resolve(editor);
