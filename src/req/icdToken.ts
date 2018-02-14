@@ -24,6 +24,7 @@ export enum CompletionItemKind
     Variable = 5,
     Class = 6
 }
+
 /**
  * Base token class
  * 
@@ -35,6 +36,7 @@ export class ICDGenericToken
     public regExp : RegExp;
     public tokenType : ICDTokenID;
 }
+
 /**
  * Base token attributes
  * 
@@ -167,6 +169,7 @@ export function findTokenFromUnknownStart(
     }
     return undefined;
 }
+
 /**
  * Determine if the token in line exists in the section start
  * 
