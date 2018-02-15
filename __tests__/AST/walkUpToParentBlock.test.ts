@@ -9,7 +9,7 @@ import {
     findParentSectionFromLinePosition,
     findTokenFromUnknownStart
 } from "./../../src/req/icdToken";
-import {getTokenLayout, buildMonarchTokens} from "./../../src//req/treeLayout";
+import {getTokenLayout, buildMonarchTokens} from "./../../src/req/treeLayout";
 import {$01} from "./../../src/req/sections/01";
 import {Gastro} from "./../../src/req/sections/01/gastro";
 import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
