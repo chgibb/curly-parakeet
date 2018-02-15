@@ -40,13 +40,13 @@ export function buildDocumentAST(doc : string) : Array<ICDGenericToken | ICDSect
     return res;
 }
 
-function copyToken(token : ICDItem) : ICDItem
+export function copyToken(token : ICDItem) : ICDItem
 {
     let res = Object.assign<{},ICDItem>({},token);
     return res;
 }
 
-function copyAndStripChildren(token : ICDSection) : ICDSection
+export function copyAndStripChildren(token : ICDSection) : ICDSection
 {
     let res = Object.assign<{},ICDSection>({},token);
     res.childItems = new Array<ICDItem>();
