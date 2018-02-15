@@ -41,7 +41,14 @@ do
 	
 	destination=$(echo $f | awk '{gsub("src/","dist/");print}')
 
-    ./node_modules/.bin/browserify $f -o $destination
+	if [[ "$f" != "src/server.js" ]]; then
+    	./node_modules/.bin/browserify $f -o $destination
+	fi
+
+	if [[ "$f" == "src/server.js" ]]; then
+    	./node_modules/.bin/browserify $f --node --require mongoose/lib/drivers/node-mongodb-native/connection:./drivers/node-mongodb-native/connection --require mongoose/lib/drivers/node-mongodb-native/collection:./drivers/node-mongodb-native/collection -o $destination
+	fi
+
     if [ $? != 0 ]; then
 	    cleanTSArtifacts
 		exit 1
