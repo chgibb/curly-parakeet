@@ -19,5 +19,6 @@ it(`should build correct AST for document 1`,() => {
     let res = buildDocumentAST(doc.join("\n"));
 
     expect((<ICDSection>res[0]).childSections.length).toEqual(1);
+    expect((<ICDSection>res[0]).childSections[0].childSections.length).toEqual(1);
 
 });
