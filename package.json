@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/tsc && ./node_modules/.bin/jest",
     "serve": "node_modules/.bin/http-server -c-1 ./dist -p 8888",
-    "build": "bash scripts/bundle.bash"
+    "build": "bash scripts/bundle.bash",
+    "db" : "bash scripts/runDBDaemon.bash"
   },
   "repository": {
     "type": "git",
