@@ -32,6 +32,10 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 app.use(express.static("./"));
 
+app.post("/login",function(req : any,res : any){
+    console.log(req.body);
+  });
+
 app.use(function(req : any,res : any,next : any){
     let err = new Error('File Not Found');
     (<any>err).status = 404;
@@ -46,4 +50,6 @@ app.use(function(err : any, req : any, res : any, next : any){
   app.listen(8888,function(){
 
   });
+
+
   

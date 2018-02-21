@@ -14,9 +14,13 @@ export class Login extends React.Component
     };
 
     public login = () => {
-        this.setState(() => ({
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/login");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
+        /*this.setState(() => ({
             redirectToReferrer : true
-        }));
+        }));*/
     }
 
     public render() : JSX.Element
