@@ -9,6 +9,5 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noUnusedParameters": true
   }
 }
