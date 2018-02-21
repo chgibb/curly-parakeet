@@ -40,7 +40,6 @@ userSchema.methods.authenticate = function(
                 let token = newSession(user.id);
                 if(token)
                     res.token = token;
-                res.success = true;
                 return resolve(res);
             }
         });
