@@ -4,6 +4,9 @@ import * as session from "express-session";
 const connectMongo = require("connect-mongo");
 const mongoose = require("mongoose");
 
+import {userModel,AuthenticateUser} from "./server/user";
+import {LoginRequest} from "./req/loginRequest";
+
 const mongoStore = connectMongo(session);
 
 const app = express();
@@ -32,8 +35,10 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 app.use(express.static("./"));
 
-app.post("/login",function(req : any,res : any){
-    console.log(req.body);
+app.post("/login",async function(req : any,res : any){
+    let body = (<LoginRequest>req.body);
+    console.log(body);
+    console.log(await (<AuthenticateUser>userModel.authenticate)(body.userName,body.password));
   });
 
 app.use(function(req : any,res : any,next : any){

@@ -14,7 +14,9 @@ export interface UserAuthResult
     token : string | undefined;
 }
 
-userSchema.methods.authenticate = function(
+export type AuthenticateUser = (userName : string,password : string) => Promise<UserAuthResult>;
+
+userSchema.statics.authenticate = function(
     userName : string,
     password : string
 ) : Promise<UserAuthResult> {
@@ -44,6 +46,6 @@ userSchema.methods.authenticate = function(
             }
         });
     });
-}
+} as AuthenticateUser
 
-export let userModel = mongoose.model("userModel",userSchema);
+export let userModel = mongoose.model("userModel",userSchema)();
