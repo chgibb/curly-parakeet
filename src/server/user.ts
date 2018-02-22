@@ -10,8 +10,8 @@ let userSchema = mongoose.Schema({
 
 export interface UserAuthResult
 {
-    err : any;
-    token : string;
+    err : any | undefined;
+    token : string | undefined;
 }
 
 userSchema.methods.authenticate = function(
