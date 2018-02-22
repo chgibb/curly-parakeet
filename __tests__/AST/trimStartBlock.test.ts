@@ -1,6 +1,6 @@
 /// <reference types="ts-jest" />
 
-import {trimStartBlockDeclaration} from "./../../src/req/icdToken";
+import {trimStartBlockDeclaration} from "./../../src/req/editor/icdToken";
 
 it(`should remove trailing start block declaration`,() => {
     let res = trimStartBlockDeclaration("01 Certain Infectious or Parasitic Diseases Start");

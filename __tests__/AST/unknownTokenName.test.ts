@@ -1,10 +1,10 @@
 /// <reference types="ts-jest" />
 
-import {findToken,ICDGenericToken,ICDSection, findTokenFromUnknownStart} from "./../../src/req/icdToken";
-import {getTokenLayout} from "./../../src/req/treeLayout";
-import {$01} from "./../../src/req/sections/01";
-import {Gastro} from "./../../src/req/sections/01/gastro";
-import {$1A10} from "./../../src/req/sections/01/1A10"
+import {findToken,ICDGenericToken,ICDSection, findTokenFromUnknownStart} from "./../../src/req/editor/icdToken";
+import {getTokenLayout} from "./../../src/req/editor/treeLayout";
+import {$01} from "./../../src/req/editor/sections/01";
+import {Gastro} from "./../../src/req/editor/sections/01/gastro";
+import {$1A10} from "./../../src/req/editor/sections/01/1A10"
 
 let zeroOne = new $01();
 let gastro = new Gastro(undefined);

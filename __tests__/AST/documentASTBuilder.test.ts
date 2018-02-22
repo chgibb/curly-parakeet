@@ -1,8 +1,8 @@
 /// <reference types="ts-jest" />
 
-import {ICDSection,ICDGenericToken, findTokenFromUnknownStart, ICDItem, ICDAttributes} from "./../../src/req/icdToken";
-import {buildDocumentAST,copyAndStripChildren,copyToken} from "./../../src/req/documentAST";
-import {getTokenLayout,buildMonarchTokens} from "./../../src/req/treeLayout";
+import {ICDSection,ICDGenericToken, findTokenFromUnknownStart, ICDItem, ICDAttributes} from "./../../src/req/editor/icdToken";
+import {buildDocumentAST,copyAndStripChildren,copyToken} from "./../../src/req/editor/documentAST";
+import {getTokenLayout,buildMonarchTokens} from "./../../src/req/editor/treeLayout";
 
 it(`should build correct AST for document 1`,() => {
     let doc = [

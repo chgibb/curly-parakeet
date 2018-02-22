@@ -8,11 +8,11 @@ import {
     ICDAttributes,
     findParentSectionFromLinePosition,
     findTokenFromUnknownStart
-} from "./../../src/req/icdToken";
-import {getTokenLayout, buildMonarchTokens} from "./../../src/req/treeLayout";
-import {$01} from "./../../src/req/sections/01";
-import {Gastro} from "./../../src/req/sections/01/gastro";
-import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
+} from "./../../src/req/editor/icdToken";
+import {getTokenLayout, buildMonarchTokens} from "./../../src/req/editor/treeLayout";
+import {$01} from "./../../src/req/editor/sections/01";
+import {Gastro} from "./../../src/req/editor/sections/01/gastro";
+import {FoodBorne} from "./../../src/req/editor/sections/01/foodBorne";
 
 let zerOne = new $01();
 

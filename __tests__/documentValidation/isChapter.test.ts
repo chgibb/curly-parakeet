@@ -1,8 +1,8 @@
 /// <reference types="ts-jest" />
 
-import {validate,DocumentStatus,DocumentStatusCode} from "./../../src/req/validate";
-import {buildMonarchTokens,getTokenLayout} from "../../src/req/treeLayout";
-import {findTokenFromUnknownStart,ICDItem,ICDSection} from "../../src/req/icdToken";
+import {validate,DocumentStatus,DocumentStatusCode} from "./../../src/req/editor/validate";
+import {buildMonarchTokens,getTokenLayout} from "../../src/req/editor/treeLayout";
+import {findTokenFromUnknownStart,ICDItem,ICDSection} from "../../src/req/editor/icdToken";
 
 let tokens = buildMonarchTokens(getTokenLayout(),true);
 for(let i = 0; i != tokens.length; ++i)

@@ -1,7 +1,7 @@
 /// <reference types="ts-jest" />
 
-import {autoComplete} from "./../../src/req/autoComplete";
-import {Gastro} from "./../../src/req/sections/01/gastro";
+import {autoComplete} from "./../../src/req/editor/autoComplete";
+import {Gastro} from "./../../src/req/editor/sections/01/gastro";
 
 let gastro = new Gastro(undefined);
 

@@ -1,8 +1,8 @@
 /// <reference types="ts-jest" />
 
-import {autoComplete} from "./../../src/req/autoComplete";
-import {Gastro} from "./../../src/req/sections/01/gastro";
-import {FoodBorne} from "./../../src/req/sections/01/foodBorne";
+import {autoComplete} from "./../../src/req/editor/autoComplete";
+import {Gastro} from "./../../src/req/editor/sections/01/gastro";
+import {FoodBorne} from "./../../src/req/editor/sections/01/foodBorne";
 
 let gastro = new Gastro(undefined);
 let foodBorne = new FoodBorne(undefined);

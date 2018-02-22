@@ -1,9 +1,9 @@
 /// <reference types="ts-jest" />
 
-import {findTokenFromUnknownStart,findToken, ICDSection, ICDItem,ICDAttributes, ICDCompletionItem} from "./../../src/req/icdToken";
-import {getTokenLayout,buildMonarchTokens} from "./../../src/req/treeLayout";
-import {autoComplete} from "./../../src/req/autoComplete";
-import {ICDTokenID} from "../../src/req/icdTokenID";
+import {findTokenFromUnknownStart,findToken, ICDSection, ICDItem,ICDAttributes, ICDCompletionItem} from "./../../src/req/editor/icdToken";
+import {getTokenLayout,buildMonarchTokens} from "./../../src/req/editor/treeLayout";
+import {autoComplete} from "./../../src/req/editor/autoComplete";
+import {ICDTokenID} from "../../src/req/editor/icdTokenID";
 
 let tokens = buildMonarchTokens(getTokenLayout(),true);
 for(let i = 0; i != tokens.length; ++i)

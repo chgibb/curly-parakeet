@@ -1,7 +1,7 @@
 /// <reference types="ts-jest" />
 
-import {findTokenFromUnknownStart,findToken, ICDSection, ICDItem} from "./../../src/req/icdToken";
-import {getTokenLayout,buildMonarchTokens} from "./../../src/req/treeLayout";
+import {findTokenFromUnknownStart,findToken, ICDSection, ICDItem} from "./../../src/req/editor/icdToken";
+import {getTokenLayout,buildMonarchTokens} from "./../../src/req/editor/treeLayout";
 
 let tokens = buildMonarchTokens(getTokenLayout(),true);
 for(let i = 0; i != tokens.length; ++i)
