@@ -13,7 +13,10 @@ export function newSession(user : string) : string
     for(let i = 0; i != sessions.length; ++i)
     {
         if(sessions[i].user == user)
-            return "";
+        {
+            sessions.splice(i,1);
+            break;
+        }
     }
 
     let token = uuidv4();
@@ -24,20 +27,6 @@ export function newSession(user : string) : string
     });
 
     return token;
-}
-
-export function removeSession(token : string) : boolean
-{
-    for(let i = 0; i != sessions.length; ++i)
-    {
-        if(sessions[i].token == token)
-        {
-            sessions.splice(i,1);
-            return true;
-        }
-    }
-
-    return false;
 }
 
 export function getUserFromSession(token : string) : string
