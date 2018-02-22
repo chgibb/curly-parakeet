@@ -6,8 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/tsc && ./node_modules/.bin/jest",
     "serve": "cd dist && node server",
-    "build": "bash scripts/bundle.bash",
-    "db": "bash scripts/runDBDaemon.bash"
+    "build": "bash scripts/bundle.bash"
   },
   "repository": {
     "type": "git",
@@ -42,6 +41,7 @@
     "jest": "^22.0.6",
     "jsdom": "^11.5.1",
     "material-ui": "^0.20.0",
+    "mkdirp": "^0.5.1",
     "monaco-editor": "^0.10.1",
     "mongoose": "^5.0.5",
     "react": "^16.2.0",
