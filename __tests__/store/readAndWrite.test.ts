@@ -22,7 +22,7 @@ let user : User = <User>{
 
 it(`should be undefined`,async () => {
     
-    let user = await find<User>("db/users.json",function(item : User){
+    let user = await find<User>("rwTest/users.json",function(item : User){
         if(item.userName == "test")
             return true;
         return false;
@@ -32,12 +32,12 @@ it(`should be undefined`,async () => {
 
 it(`should be true`,() => {
 
-    expect(write("db/users.json",user)).toBe(true);
+    expect(write("rwTest/users.json",user)).toBe(true);
     
 });
 
 it(`should be able to find user`,async () => {
-    let user = await find<User>("db/users.json",function(item : User){
+    let user = await find<User>("rwTest/users.json",function(item : User){
         if(item.userName == "test")
             return true;
         return false;
@@ -54,9 +54,9 @@ for(let i = 0; i != 150; ++i)
             password : makeHash("password")
         };
 
-        expect(write("db/users.json",bulkUser)).toBe(true);
+        expect(write("rwTest/users.json",bulkUser)).toBe(true);
 
-        let res = await find<User>("db/users.json",function(item : User){
+        let res = await find<User>("rwTest/users.json",function(item : User){
             if(item.userName == `test${i}`)
                 return true;
             return false;
@@ -69,7 +69,7 @@ for(let i = 0; i != 150; ++i)
 for(let i = 0; i != 150; ++i)
 {
     it(`should be able to bulk update ${i}`,async () => {
-        let res = await find<User>("db/users.json",function(item : User){
+        let res = await find<User>("rwTest/users.json",function(item : User){
             if(item.userName == `test${i}`)
                 return true;
             return false;
@@ -80,9 +80,9 @@ for(let i = 0; i != 150; ++i)
 
         res!.item.password = makeHash("newpassword");
 
-        expect(writeRecord("db/users.json",res!)).toBe(true);
+        expect(writeRecord("rwTest/users.json",res!)).toBe(true);
 
-        res = await find<User>("db/users.json",function(item : User){
+        res = await find<User>("rwTest/users.json",function(item : User){
             if(item.userName == `test${i}`)
                 return true;
             return false;
