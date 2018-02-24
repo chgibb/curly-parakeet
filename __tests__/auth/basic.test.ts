@@ -3,7 +3,7 @@ import {find,write} from "./../../src/server/store/store";
 import {makeHash,Hash} from "./../../src/req/makeHash";
 
 it(`should create new user`,async() => {
-    let res = await newUser(`testUser`,"password");
+    let res = await newUser(`testUser`,makeHash("password"));
 
     expect(res).toBe(true);
 });
@@ -39,7 +39,7 @@ it(`should be able to auth user`,async () => {
 for(let i = 0; i != 150; ++i)
 {
     it(`should create new user ${i}`,async() => {
-        let res = await newUser(`testUser${i}`,"password");
+        let res = await newUser(`testUser${i}`,makeHash("password"));
     
         expect(res).toBe(true);
     });

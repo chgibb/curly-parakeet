@@ -3,6 +3,9 @@ import TextField from "material-ui/TextField";
 import RaisedButton from 'material-ui/RaisedButton';
 import {Redirect} from "react-router";
 
+import {LoginRequest,makeLoginRequest} from "./../req/loginRequest";
+import {makeCreateUserRequest} from "./../req/createUserRequest";
+
 const style = {
   margin: 12,
 };
@@ -13,14 +16,35 @@ export class Login extends React.Component
         redirectToReferrer : false
     };
 
-    public login = () => {
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/login");
-        xmlhttp.setRequestHeader("Content-Type", "application/json");
-        xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
+    public login = async() => {
+        try
+        {
+            await makeLoginRequest({
+                userName : (document.getElementById("userField") as HTMLInputElement).value,
+                password : (document.getElementById("passwordField") as HTMLInputElement).value
+            });
+        }
+        catch(err)
+        {
+            alert("Login failed");
+        }
         /*this.setState(() => ({
             redirectToReferrer : true
         }));*/
+    }
+
+    public createUser = async () => {
+        try
+        {
+            await makeCreateUserRequest({
+                userName : (document.getElementById("userField") as HTMLInputElement).value,
+                password : (document.getElementById("passwordField") as HTMLInputElement).value
+            })
+        }
+        catch(err)
+        {
+            alert("Failed to create user");
+        }
     }
 
     public render() : JSX.Element
@@ -34,10 +58,12 @@ export class Login extends React.Component
         }
         return (
             <div>
-                <TextField hintText="User Name" />
+                <TextField id="userField" hintText="User Name" />
                 <br />
-                <TextField hintText="Password" />
-
+                <TextField id="passwordField" type="password" hintText="Password" />
+                <br />
+                <br />
+                <RaisedButton label="Create User" style={style} onClick={this.createUser} />
                 <RaisedButton label="Login" style={style} onClick={this.login} />
             </div>
         );

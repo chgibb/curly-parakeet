@@ -55,7 +55,7 @@ export function authenticate(user : string,password : Hash) : Promise<string>
     });
 }
 
-export function newUser(user : string,password : Hash) : Promise<boolean>
+export function newUser(user : string,password : string) : Promise<boolean>
 {
     return new Promise<boolean>(async (resolve,reject) => {
         let res = await find<User>(usersDB,function(item : User){
@@ -73,7 +73,7 @@ export function newUser(user : string,password : Hash) : Promise<boolean>
         {
             return resolve(write<User>(usersDB,{
                 userName : user,
-                password : makeHash(password),
+                password : password,
                 email : "",
                 id : uuidv4()
             }));

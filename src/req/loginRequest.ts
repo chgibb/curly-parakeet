@@ -15,12 +15,18 @@ export function makeLoginRequest(params : LoginRequest) : Promise<string>
 
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        xhr.onreadystatechange(function(this : XMLHttpRequest,ev : Event){
+        xhr.onreadystatechange = function(this : XMLHttpRequest,ev : Event){
+            console.log(xhr);
+            console.log(ev);
+            
+            if(xhr.status == 401)
+                return reject();
+            
             if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200)
             {
-                let res;
+                return resolve();
             }
-        } as any);
+        } as any;
 
         xhr.send(JSON.stringify(<LoginRequest>{
             userName : params.userName,
