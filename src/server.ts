@@ -2,7 +2,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as session from "express-session";
 
-import {LoginRequest} from "./req/loginRequest";
+import {LoginRequest, LoginResponse} from "./req/loginRequest";
 import {authenticate,newUser} from "./server/authenticate";
 import {CreateUserRequest} from "./req/createUserRequest";
 
@@ -28,7 +28,7 @@ app.post("/login",async function(req : any,res : any){
     else
       res.status(200);
 
-    res.send();
+    res.send(<LoginResponse>{token : authResult});
 });
 
 app.post("/createUser",async function(req : any,res : any){

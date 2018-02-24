@@ -11,7 +11,7 @@ export class Main extends React.Component
     {
         return (
             <div>
-            <   MuiThemeProvider>
+                <MuiThemeProvider>
                     <HashRouter>
                         <div>
                             <Route exact path="/" component={Login} />

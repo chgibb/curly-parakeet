@@ -3,8 +3,9 @@ import TextField from "material-ui/TextField";
 import RaisedButton from 'material-ui/RaisedButton';
 import {Redirect} from "react-router";
 
-import {LoginRequest,makeLoginRequest} from "./../req/loginRequest";
+import {LoginRequest,makeLoginRequest,LoginResponse} from "./../req/loginRequest";
 import {makeCreateUserRequest} from "./../req/createUserRequest";
+import {setCurrentToken} from "./../client/authToken";
 
 const style = {
   margin: 12,
@@ -17,9 +18,10 @@ export class Login extends React.Component
     };
 
     public login = async() => {
+        let response : LoginResponse;
         try
         {
-            await makeLoginRequest({
+            response = await makeLoginRequest({
                 userName : (document.getElementById("userField") as HTMLInputElement).value,
                 password : (document.getElementById("passwordField") as HTMLInputElement).value
             });
@@ -27,10 +29,14 @@ export class Login extends React.Component
         catch(err)
         {
             alert("Login failed");
+            return;
         }
-        /*this.setState(() => ({
+        
+        setCurrentToken(response!.token);
+        
+        this.setState(() => ({
             redirectToReferrer : true
-        }));*/
+        }));
     }
 
     public createUser = async () => {
@@ -43,7 +49,7 @@ export class Login extends React.Component
         }
         catch(err)
         {
-            alert("Failed to create user");
+        
         }
     }
 

@@ -2,7 +2,8 @@ import {
     ICDSection,
     ICDGenericToken,
     findTokenFromUnknownStart,
-    ICDItem
+    ICDItem,
+    getUserValueOnItem
 } from "./icdToken";
 import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -34,6 +35,7 @@ export function buildDocumentAST(doc : string) : Array<ICDGenericToken | ICDSect
         {
             let parent = (<ICDSection>findTokenFromUnknownStart(res,token!.parent!.completionItem.label));
             parent.childItems.push(copyToken((<ICDItem>token)));
+            getUserValueOnItem(lines[i],(<ICDItem>parent.childItems[parent.childItems.length-1]));
         }
     }
 

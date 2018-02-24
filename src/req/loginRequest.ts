@@ -6,9 +6,14 @@ export interface LoginRequest
     password : string;
 }
 
-export function makeLoginRequest(params : LoginRequest) : Promise<string>
+export interface LoginResponse
 {
-    return new Promise<string>((resolve,reject) => {
+    token : string;
+}
+
+export function makeLoginRequest(params : LoginRequest) : Promise<LoginResponse>
+{
+    return new Promise<LoginResponse>((resolve,reject) => {
         let xhr : XMLHttpRequest = new XMLHttpRequest();
 
         xhr.open("POST", "/login");
@@ -24,7 +29,9 @@ export function makeLoginRequest(params : LoginRequest) : Promise<string>
             
             if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200)
             {
-                return resolve();
+                return resolve(<LoginResponse>{
+                    token : (xhr.response as LoginResponse).token
+                });
             }
         } as any;
 

@@ -82,12 +82,19 @@ export class ICDSection extends ICDAttributes
 export class ICDItem extends ICDAttributes
 {
     public rawCode : string;
+    public userValue : string;
     
     public constructor(parent : ICDAttributes | undefined)
     {
         super();
         this.parent = parent;
     }
+}
+
+export function getUserValueOnItem(line : string,item : ICDItem) : void
+{
+    line = line.replace(new RegExp(`(${item.completionItem.insertText})`),"");
+    item.userValue = line;
 }
 
 /**
