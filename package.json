@@ -27,6 +27,7 @@
     "@types/express": "^4.11.1",
     "@types/express-session": "^1.15.8",
     "@types/jest": "^22.0.1",
+    "@types/jquery": "^3.3.0",
     "@types/node": "^9.3.0",
     "body-parser": "^1.18.2",
     "browserify": "^15.0.0",

@@ -70,6 +70,10 @@ do
     cp $f $destination
 done
 
+printf "Copying styles\n"
+
+cp -R src/css dist/css
+
 printf "Done\n"
 
 cp -R node_modules/monaco-editor/dev/vs/** dist/vs

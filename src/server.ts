@@ -31,7 +31,7 @@ app.post("/login",async function(req : any,res : any){
 
     if(!authResult)
     {
-      res.status(401);
+      res.sendStatus(401);
       return;
     }
 

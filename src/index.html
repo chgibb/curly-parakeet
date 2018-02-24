@@ -1,14 +1,58 @@
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	</head>
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
-	<body>
-		<img src="img/logo.png" style="float:right;">
-		<!--<div id="container" style="width:800px;height:600px;border:1px solid grey"></div>-->
-		<p id="documentStatus"></p>
-		<div id="app"></div>
-		<script src="index.js"></script>
-	</body>
+<head>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="index.js"></script>
+</head>
+
+<body>
+
+	<div data-role="page" id="page_login" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
+		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
+			 href="">About</a>
+			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+		</div>
+
+		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
+			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
+			<input id="input_userName" type="text" />
+			<input id="input_passWord" type="password" />
+			<br />
+			<input type="button" id="button_login" value="Login" />
+			<input type="button" id="button_createUser" value="Create User" />
+		</div>
+
+		<div data-role="footer" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<h4 class="smallFooter" style="text-align:center;">Curly Parakeet EHR</h4>
+		</div>
+	</div>
+
+	<div data-role="page" id="page_patientList" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
+		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
+			 href="">About</a>
+			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+		</div>
+
+		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
+			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
+			<br />
+			<input type="button" id="button_createNewPatient" value="Create New Patient" />
+		</div>
+
+		<div data-role="footer" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<h4 class="smallFooter" style="text-align:center;">Curly Parakeet EHR</h4>
+		</div>
+	</div>
+</body>
+
 </html>
