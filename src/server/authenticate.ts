@@ -1,9 +1,9 @@
 const uuidv4 : () => string = require("uuid/v4");
 
-import {Hash} from "./../req/makeHash";
+import {Hash, makeHash} from "./../req/makeHash";
 import {find,write} from "./store/store";
 
-interface User
+export interface User
 {
     userName : string;
     password : Hash;
@@ -71,12 +71,12 @@ export function newUser(user : string,password : Hash) : Promise<boolean>
 
         else
         {
-            return write<User>(usersDB,{
+            return resolve(write<User>(usersDB,{
                 userName : user,
-                password : password,
+                password : makeHash(password),
                 email : "",
                 id : uuidv4()
-            });
+            }));
         }
     });
 }

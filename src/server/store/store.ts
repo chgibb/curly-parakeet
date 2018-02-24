@@ -103,7 +103,6 @@ export function write<T>(storePath : string,item : T) : boolean
                 id : makeHash(JSON.stringify(item)),
                 item : item
             });
-
             fs.writeFileSync(storePath,JSON.stringify(store));
 
         }
