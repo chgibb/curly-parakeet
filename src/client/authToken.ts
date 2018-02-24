@@ -7,5 +7,7 @@ export function getCurrentToken() : string
 
 export function setCurrentToken(newToken : string) : void
 {
+    console.log("set to");
+    console.log(newToken);
     token = newToken;
 }

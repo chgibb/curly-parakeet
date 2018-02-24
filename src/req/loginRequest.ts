@@ -19,6 +19,7 @@ export function makeLoginRequest(params : LoginRequest) : Promise<LoginResponse>
         xhr.open("POST", "/login");
 
         xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.responseType = "json";
 
         xhr.onreadystatechange = function(this : XMLHttpRequest,ev : Event){
             console.log(xhr);
@@ -29,9 +30,7 @@ export function makeLoginRequest(params : LoginRequest) : Promise<LoginResponse>
             
             if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200)
             {
-                return resolve(<LoginResponse>{
-                    token : (xhr.response as LoginResponse).token
-                });
+                return resolve(xhr.response as LoginResponse);
             }
         } as any;
 

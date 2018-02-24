@@ -13,6 +13,7 @@ export interface CreateUserRequest
             xhr.open("POST", "/createUser");
 
             xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.responseType = "json";
 
             xhr.onreadystatechange = function(this : XMLHttpRequest,ev : Event){
                 if(xhr.status != 201)
