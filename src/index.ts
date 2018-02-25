@@ -27,6 +27,13 @@ let patientListOnClick = async function(this : any){
         }
     }
     setTimeout(async function(){
+        if(!ICDEditor)
+        {
+            ICDEditor = await loadICDEditor(
+                document.getElementById("editor")!,
+                document.getElementById("documentStatus")!
+            )
+        };
         ICDEditor!.setValue(selectedPatient!.doc);
         setOnValidDocument(async function(doc : string){
             selectedPatient.doc = doc;
@@ -59,10 +66,7 @@ let patients : Array<PatientRecord>;
 
 document.addEventListener(
     "DOMContentLoaded",async (e : Event) => {
-        ICDEditor = await loadICDEditor(
-            document.getElementById("editor")!,
-            document.getElementById("documentStatus")!
-        );
+        
         
         document.getElementById("button_login")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             try
