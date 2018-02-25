@@ -4,14 +4,9 @@ export interface NewPatientRequest
     token : string;
 }
 
-export interface NewPatientResponse
+export function makeNewPatientRequest(params : NewPatientRequest) : Promise<void>
 {
-    token : string;
-}
-
-export function makeNewPatientRequest(params : NewPatientRequest) : Promise<NewPatientResponse>
-{
-    return new Promise<NewPatientResponse>((resolve,reject) => {
+    return new Promise<void>((resolve,reject) => {
         let xhr : XMLHttpRequest = new XMLHttpRequest();
 
         xhr.open("POST", "/newPatient");
@@ -26,10 +21,10 @@ export function makeNewPatientRequest(params : NewPatientRequest) : Promise<NewP
             if(xhr.status == 401)
                 return reject();
             
-                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 201)
-                {
-                    return resolve(xhr.response as NewPatientResponse);
-                }
+            if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 201)
+            {
+                return resolve();
+            }
         } as any;
 
         xhr.send(JSON.stringify(params));

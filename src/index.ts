@@ -2,12 +2,15 @@ import {changePage} from "./client/jqm";
 
 import {setCurrentToken,getCurrentToken} from "./client/authToken";
 import {makeLoginRequest} from "./req/loginRequest";
-import { makeCreateUserRequest } from "./req/createUserRequest";
+import {makeCreateUserRequest} from "./req/createUserRequest";
+import {makeNewPatientRequest,NewPatientRequest} from "./req/newPatient";
+import {PatientRecord} from "./req/patientRecord";
+import {updatePatientList} from "./client/updatePatientList";
 
 
 document.addEventListener(
     "DOMContentLoaded",(e : Event) => {
-        document.getElementById("button_login")!.onclick = async function(){
+        document.getElementById("button_login")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             try
             {
                 let response = await makeLoginRequest({
@@ -26,7 +29,7 @@ document.addEventListener(
             }
         };
 
-        document.getElementById("button_createUser")!.onclick = async function(){
+        document.getElementById("button_createUser")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             try
             {
                 let response = await makeCreateUserRequest({
@@ -40,6 +43,29 @@ document.addEventListener(
                 return;
             }
             alert(`User ${(document.getElementById("input_userName") as HTMLInputElement).value} successfully created`);
+        };
+
+        document.getElementById("button_createNewPatient")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
+            try
+            {
+                await makeNewPatientRequest(<NewPatientRequest>{
+                    token : getCurrentToken()
+                });
+            }
+            catch(err)
+            {
+                alert("Creating new patient failed");
+                return;
+            }
+
+            await updatePatientList();
+            
+        };
+
+        document.getElementById("button_backToPatientList")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
+            changePage("#page_patientList");
+
+            await updatePatientList();
         };
     }
 );

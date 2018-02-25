@@ -4,6 +4,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 <head>
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -47,12 +48,38 @@
 			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
 			<br />
 			<input type="button" id="button_createNewPatient" value="Create New Patient" />
+			<div id="patientsListContainer">
+			
+				<ul id='list_patients' data-role='listview'>
+				</ul>
+			</div>
 		</div>
 
 		<div data-role="footer" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
 			<h4 class="smallFooter" style="text-align:center;">Curly Parakeet EHR</h4>
 		</div>
 	</div>
+
+	<div data-role="page" id="page_editPatient" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
+		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
+			 href="">About</a>
+			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+		</div>
+
+		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
+			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
+			<br />
+			<input type="button" id="button_backToPatientList" value="Go Back" />
+
+		</div>
+
+		<div data-role="footer" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
+			<h4 class="smallFooter" style="text-align:center;">Curly Parakeet EHR</h4>
+		</div>
+	</div>
+
 </body>
 
 </html>

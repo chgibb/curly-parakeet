@@ -8,7 +8,7 @@ import {write, find} from "./server/store/store";
 import {LoginRequest, LoginResponse} from "./req/loginRequest";
 import {authenticate,newUser,getIDFromToken} from "./server/authenticate";
 import {CreateUserRequest} from "./req/createUserRequest";
-import {NewPatientRequest,NewPatientResponse} from "./req/newPatient";
+import {NewPatientRequest} from "./req/newPatient";
 import {PatientRecord} from "./req/patientRecord";
 import {GetPatientsRequest,GetPatientsResponse} from "./req/getPatients";
 
@@ -87,7 +87,7 @@ app.post("/newPatient",async function(req : any,res : any){
 
   }
 
-  res.send(201);
+  res.sendStatus(201);
   
 });
 
@@ -112,6 +112,8 @@ app.post("/getPatients",async function(req : any,res : any){
       patients.push(item);
     return false;
   });
+
+  res.status(201);
 
   res.send(<GetPatientsResponse>{
     patients : patients
