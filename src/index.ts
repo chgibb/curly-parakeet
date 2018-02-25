@@ -7,24 +7,49 @@ import {makeNewPatientRequest,NewPatientRequest} from "./req/newPatient";
 import {PatientRecord} from "./req/patientRecord";
 import {updatePatientList} from "./client/updatePatientList";
 import {makeGetPatientsRequest,GetPatientsRequest} from "./req/getPatients";
+import {makeUpdatePatientRequest,UpdatePatientRequest} from "./req//updatePatient";
 
 import {loadICDEditor} from "./req/editor/loadICDEditor";
 
+async function onValidDocument(doc : string,patient : PatientRecord)
+{
+    patient.doc = doc;
+    try
+    {
+        await makeUpdatePatientRequest(<UpdatePatientRequest>{
+            record : patient,
+            token : getCurrentToken()
+        });
+    }
+    catch(err)
+    {
+        alert(`Failed to save document`);
+    }
+}
+
+let ICDEditor : monaco.editor.IStandaloneCodeEditor | null;
+
 let patientListOnClick = async function(this : any){
     let id = $(this).attr("id");
+    let selectedPatient : PatientRecord;
     changePage("#page_editPatient");
-    let editor = await loadICDEditor(
-        document.getElementById("editor")!,
-        document.getElementById("documentStatus")!
-    );
+
     for(let i = 0; i != patients.length; ++i)
     {
         if(patients[i].id == id)
         {
-            editor.setValue(patients[i].doc);
-            return;
+            selectedPatient = patients[i];
+            break;
         }
     }
+    setTimeout(async function(){
+
+    
+
+
+    ICDEditor.setValue(selectedPatient!.doc);
+},100);
+    
 };
 
 async function updatePatients()
@@ -40,6 +65,13 @@ let patients : Array<PatientRecord>;
 
 document.addEventListener(
     "DOMContentLoaded",async (e : Event) => {
+        ICDEditor = await loadICDEditor(
+            document.getElementById("editor")!,
+            document.getElementById("documentStatus")!,
+            function(doc : string){
+                onValidDocument(doc,selectedPatient)
+            }
+        );
         
         document.getElementById("button_login")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             try

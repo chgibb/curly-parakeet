@@ -15,8 +15,11 @@ export function stopErrorMonitor() : void
     clearTimeout(errorMonitor);
 }
 
-export function loadICDEditor(div : HTMLElement | null,errorOutput : HTMLElement | null) : Promise<monaco.editor.IStandaloneCodeEditor>
-{
+export function loadICDEditor(
+    div : HTMLElement | null,
+    errorOutput : HTMLElement | null,
+    onValidDocument : (doc : string) => void
+) : Promise<monaco.editor.IStandaloneCodeEditor> {
     if(!div)
         throw new Error("Editor container is null");
     if(!errorOutput)
@@ -69,14 +72,24 @@ export function loadICDEditor(div : HTMLElement | null,errorOutput : HTMLElement
         
         });
 
+        let lastBroadcastDoc = "";
         errorMonitor = setInterval(function(){
             let status = validate(editor.getValue());
             document.getElementById(errorOutput.id)!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
             if(status.code == 0)
             {
-                console.log(buildDocumentAST(editor.getValue()));
+                if(lastBroadcastDoc != editor.getValue())
+                {
+                    lastBroadcastDoc = editor.getValue();
+                    onValidDocument(lastBroadcastDoc);
+                }
             }
         },1000);
+
+        editor.onDidDispose(function(){
+            console.log("called ondiddispose");
+            clearInterval(errorMonitor);
+        });
 
         resolve(editor);
     }); 
