@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import * as session from "express-session";
 const uuidv4 : () => string = require("uuid/v4");
 
-import {write, find} from "./server/store/store";
+import {write, find, writeRecord} from "./server/store/store";
 
 import {LoginRequest, LoginResponse} from "./req/loginRequest";
 import {authenticate,newUser,getIDFromToken} from "./server/authenticate";
@@ -11,6 +11,7 @@ import {CreateUserRequest} from "./req/createUserRequest";
 import {NewPatientRequest} from "./req/newPatient";
 import {PatientRecord} from "./req/patientRecord";
 import {GetPatientsRequest,GetPatientsResponse} from "./req/getPatients";
+import {UpdatePatientRequest} from "./req/updatePatient";
 
 const app = express();
 
@@ -119,6 +120,47 @@ app.post("/getPatients",async function(req : any,res : any){
     patients : patients
   });
 
+});
+
+app.post("/updatePatient",async function(req : any,res : any){
+  res.type("json");
+  console.log(req.body);
+
+  let body = (<UpdatePatientRequest>req.body);
+
+  let id = getIDFromToken(body.token);
+
+  if(!id)
+  {
+    res.sendStatus(401);
+    return;
+  }
+
+  let record = await find<PatientRecord>("db/patients.json",function(item : PatientRecord){
+    if(item.id == body.record.id && item.userID == id && item.userID == body.record.userID)
+      return true;
+    
+    return false;
+  });
+
+  if(!record)
+  {
+    res.sendStatus(401);
+    return;
+  }
+
+  record.item.doc = body.record.doc;
+
+  let wrote = writeRecord<PatientRecord>("db/patients.json",record);
+
+  if(!wrote)
+  {
+    res.sendStatus(401);
+    return;
+  }
+
+  res.sendStatus(201);
+  
 });
 
 app.use(function(req : any,res : any,next : any){

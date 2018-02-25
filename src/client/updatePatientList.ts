@@ -1,22 +1,13 @@
 import {PatientRecord} from "./../req/patientRecord";
-import {makeGetPatientsRequest,GetPatientsRequest} from "./../req/getPatients";
-import {getCurrentToken} from "./authToken";
 
 import {findTokenFromUnknownStart, ICDItem} from "./../req/editor/icdToken";
 import {buildDocumentAST} from "./../req/editor/documentAST";
 import {$FirstName} from "./../req/editor/sections/00/firstName";
 import {$LastName} from "./../req/editor/sections/00/lastName";
 
-export function updatePatientList(listClick : (this : any) => void) : Promise<void>
+export function updatePatientList(patients : Array<PatientRecord>,listClick : (this : any) => void) : Promise<void>
 {
     return new Promise<void>(async (resolve,reject) => {
-        let response = await makeGetPatientsRequest(<GetPatientsRequest>{
-            token : getCurrentToken()
-        });
-
-        if(response.patients.length == 0)
-            return;
-        
 
         let div = document.getElementById("patientsListContainer")!;
 
@@ -24,10 +15,10 @@ export function updatePatientList(listClick : (this : any) => void) : Promise<vo
         let lastNameToken = new $LastName(undefined);
 
         let res = "<br /><br /><ul id='list_patients' data-role='listview'>";
-        for(let i = 0; i != response.patients.length; ++i)
+        for(let i = 0; i != patients.length; ++i)
         {
-            res += `<li class="activeHover" id="${response.patients[i].id}">`;
-            let docAST = buildDocumentAST(response.patients[i].doc);
+            res += `<li class="activeHover" id="${patients[i].id}">`;
+            let docAST = buildDocumentAST(patients[i].doc);
             res += (findTokenFromUnknownStart(
                 docAST,
                 (firsNameToken.completionItem.insertText! as string).trim()
