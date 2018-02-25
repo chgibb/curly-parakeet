@@ -8,6 +8,7 @@ import {PatientRecord} from "./req/patientRecord";
 import {updatePatientList} from "./client/updatePatientList";
 import {makeGetPatientsRequest,GetPatientsRequest} from "./req/getPatients";
 import {makeUpdatePatientRequest,UpdatePatientRequest} from "./req//updatePatient";
+import {updatePatientSummary} from "./client/updatePatientSummary";
 
 import {loadICDEditor,setOnValidDocument} from "./req/editor/loadICDEditor";
 
@@ -36,6 +37,7 @@ let patientListOnClick = async function(this : any){
         };
         ICDEditor!.setValue(selectedPatient!.doc);
         setOnValidDocument(async function(doc : string){
+            updatePatientSummary(document.getElementById("editPatientSummary"),doc);
             selectedPatient.doc = doc;
             try
             {
