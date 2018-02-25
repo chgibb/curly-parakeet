@@ -7,9 +7,12 @@ import {makeNewPatientRequest,NewPatientRequest} from "./req/newPatient";
 import {PatientRecord} from "./req/patientRecord";
 import {updatePatientList} from "./client/updatePatientList";
 
+import {loadICDEditor} from "./req/editor/loadICDEditor";
+
 
 document.addEventListener(
-    "DOMContentLoaded",(e : Event) => {
+    "DOMContentLoaded",async (e : Event) => {
+        
         document.getElementById("button_login")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             try
             {
@@ -58,14 +61,29 @@ document.addEventListener(
                 return;
             }
 
-            await updatePatientList();
+            await updatePatientList(async function(this : any){
+                console.log($(this).attr("id"));
+                changePage("#page_editPatient");
+                let editor = await loadICDEditor(
+                    document.getElementById("editor")!,
+                    document.getElementById("documentStatus")!
+                );
+            });
             
         };
 
         document.getElementById("button_backToPatientList")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             changePage("#page_patientList");
 
-            await updatePatientList();
+            await updatePatientList(async function(this : any){
+                console.log($(this).attr("id"));
+                changePage("#page_editPatient");
+                let editor = await loadICDEditor(
+                    document.getElementById("editor")!,
+                    document.getElementById("documentStatus")!
+                );
+            });
         };
+
     }
 );

@@ -6,9 +6,8 @@ import {findTokenFromUnknownStart, ICDItem} from "./../req/editor/icdToken";
 import {buildDocumentAST} from "./../req/editor/documentAST";
 import {$FirstName} from "./../req/editor/sections/00/firstName";
 import {$LastName} from "./../req/editor/sections/00/lastName";
-import {changePage} from "./../client/jqm";
 
-export function updatePatientList() : Promise<void>
+export function updatePatientList(listClick : (this : any) => void) : Promise<void>
 {
     return new Promise<void>(async (resolve,reject) => {
         let response = await makeGetPatientsRequest(<GetPatientsRequest>{
@@ -46,11 +45,6 @@ export function updatePatientList() : Promise<void>
         res += "</ul>";
         div.innerHTML = res;
         ($("#patientsListContainer") as any).trigger("create");
-        ($("#list_patients") as any).listview("refresh").delegate("li","click",function(this : any){
-            console.log($(this).attr("id"));
-            changePage("#page_editPatient");
-        });
-
-        
+        ($("#list_patients") as any).listview("refresh").delegate("li","click",listClick);
     });
 }
