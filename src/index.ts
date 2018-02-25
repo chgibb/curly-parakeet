@@ -9,23 +9,7 @@ import {updatePatientList} from "./client/updatePatientList";
 import {makeGetPatientsRequest,GetPatientsRequest} from "./req/getPatients";
 import {makeUpdatePatientRequest,UpdatePatientRequest} from "./req//updatePatient";
 
-import {loadICDEditor} from "./req/editor/loadICDEditor";
-
-async function onValidDocument(doc : string,patient : PatientRecord)
-{
-    patient.doc = doc;
-    try
-    {
-        await makeUpdatePatientRequest(<UpdatePatientRequest>{
-            record : patient,
-            token : getCurrentToken()
-        });
-    }
-    catch(err)
-    {
-        alert(`Failed to save document`);
-    }
-}
+import {loadICDEditor,setOnValidDocument} from "./req/editor/loadICDEditor";
 
 let ICDEditor : monaco.editor.IStandaloneCodeEditor | null;
 
@@ -43,12 +27,22 @@ let patientListOnClick = async function(this : any){
         }
     }
     setTimeout(async function(){
-
-    
-
-
-    ICDEditor.setValue(selectedPatient!.doc);
-},100);
+        ICDEditor!.setValue(selectedPatient!.doc);
+        setOnValidDocument(async function(doc : string){
+            selectedPatient.doc = doc;
+            try
+            {
+                await makeUpdatePatientRequest(<UpdatePatientRequest>{
+                    record : selectedPatient,
+                    token : getCurrentToken()
+                });
+            }
+            catch(err)
+            {
+                alert(`Failed to save document`);
+            }
+        });
+    },100);
     
 };
 
@@ -67,10 +61,7 @@ document.addEventListener(
     "DOMContentLoaded",async (e : Event) => {
         ICDEditor = await loadICDEditor(
             document.getElementById("editor")!,
-            document.getElementById("documentStatus")!,
-            function(doc : string){
-                onValidDocument(doc,selectedPatient)
-            }
+            document.getElementById("documentStatus")!
         );
         
         document.getElementById("button_login")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
@@ -132,6 +123,5 @@ document.addEventListener(
             await updatePatients();
             await updatePatientList(patients,patientListOnClick);
         };
-
     }
 );

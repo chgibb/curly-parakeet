@@ -15,10 +15,15 @@ export function stopErrorMonitor() : void
     clearTimeout(errorMonitor);
 }
 
+let onValidDocument : (doc : string) => void | undefined;
+export function setOnValidDocument(cb : (doc : string) => void) : void
+{
+    onValidDocument = cb;
+}
+
 export function loadICDEditor(
     div : HTMLElement | null,
-    errorOutput : HTMLElement | null,
-    onValidDocument : (doc : string) => void
+    errorOutput : HTMLElement | null
 ) : Promise<monaco.editor.IStandaloneCodeEditor> {
     if(!div)
         throw new Error("Editor container is null");
@@ -81,7 +86,8 @@ export function loadICDEditor(
                 if(lastBroadcastDoc != editor.getValue())
                 {
                     lastBroadcastDoc = editor.getValue();
-                    onValidDocument(lastBroadcastDoc);
+                    if(onValidDocument)
+                        onValidDocument(lastBroadcastDoc);
                 }
             }
         },1000);
