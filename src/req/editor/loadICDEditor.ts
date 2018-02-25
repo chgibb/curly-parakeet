@@ -15,8 +15,16 @@ export function stopErrorMonitor() : void
     clearTimeout(errorMonitor);
 }
 
-export function loadICDEditor(div : HTMLElement | null,errorOutput : HTMLElement | null) : Promise<monaco.editor.IStandaloneCodeEditor>
+let onValidDocument : (doc : string) => void | undefined;
+export function setOnValidDocument(cb : (doc : string) => void) : void
 {
+    onValidDocument = cb;
+}
+
+export function loadICDEditor(
+    div : HTMLElement | null,
+    errorOutput : HTMLElement | null
+) : Promise<monaco.editor.IStandaloneCodeEditor> {
     if(!div)
         throw new Error("Editor container is null");
     if(!errorOutput)
@@ -69,14 +77,28 @@ export function loadICDEditor(div : HTMLElement | null,errorOutput : HTMLElement
         
         });
 
+        let lastBroadcastDoc = "";
         errorMonitor = setInterval(function(){
             let status = validate(editor.getValue());
-            document.getElementById(errorOutput.id)!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
+            errorOutput!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
             if(status.code == 0)
             {
-                console.log(buildDocumentAST(editor.getValue()));
+                errorOutput!.style.color = "green";
+                if(lastBroadcastDoc != editor.getValue())
+                {
+                    lastBroadcastDoc = editor.getValue();
+                    if(onValidDocument)
+                        onValidDocument(lastBroadcastDoc);
+                }
             }
+            else
+                errorOutput.style.color = "red";
         },1000);
+
+        editor.onDidDispose(function(){
+            console.log("called ondiddispose");
+            clearInterval(errorMonitor);
+        });
 
         resolve(editor);
     }); 

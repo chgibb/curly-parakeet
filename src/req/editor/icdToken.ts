@@ -93,8 +93,9 @@ export class ICDItem extends ICDAttributes
 
 export function getUserValueOnItem(line : string,item : ICDItem) : void
 {
-    line = line.replace(new RegExp(`(${item.completionItem.insertText})`),"");
-    item.userValue = line;
+    let ref : string = (item.completionItem.insertText! as string);
+    
+    item.userValue = line.substring(ref.length);
 }
 
 /**

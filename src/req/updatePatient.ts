@@ -1,15 +1,17 @@
+import {PatientRecord} from "./patientRecord";
 
-export interface NewPatientRequest
+export interface UpdatePatientRequest
 {
+    record : PatientRecord;
     token : string;
 }
 
-export function makeNewPatientRequest(params : NewPatientRequest) : Promise<void>
+export function makeUpdatePatientRequest(params : UpdatePatientRequest) : Promise<void>
 {
     return new Promise<void>((resolve,reject) => {
         let xhr : XMLHttpRequest = new XMLHttpRequest();
 
-        xhr.open("POST", "/newPatient");
+        xhr.open("POST", "/updatePatient");
 
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.responseType = "json";
@@ -17,7 +19,7 @@ export function makeNewPatientRequest(params : NewPatientRequest) : Promise<void
         xhr.onreadystatechange = function(this : XMLHttpRequest,ev : Event){
             console.log(xhr);
             console.log(ev);
-            
+
             if(xhr.status == 401)
                 return reject();
             

@@ -23,3 +23,20 @@ it(`should parse out the user value`,() => {
 
     expect((<ICDItem>item).userValue).toEqual("123 Street");
 });
+
+it(`should parse out nothing`,() => {
+    let doc = [
+        "00 Patient Information Start",
+        "   - Address:",
+        "End"
+    ].join("\n");
+
+    let res = validate(doc);
+    let docAST = buildDocumentAST(doc);
+
+    expect(res.code).toBe(DocumentStatusCode.Valid);
+
+    let item = findTokenFromUnknownStart(docAST,(<string>address.completionItem.insertText!).trim());
+
+    expect((<ICDItem>item).userValue).toEqual("");
+});

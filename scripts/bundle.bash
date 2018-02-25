@@ -46,7 +46,7 @@ do
 	fi
 
 	if [[ "$f" == "src/server.js" ]]; then
-    	./node_modules/.bin/browserify $f --node --require mongoose/lib/drivers/node-mongodb-native/connection:./drivers/node-mongodb-native/connection --require mongoose/lib/drivers/node-mongodb-native/collection:./drivers/node-mongodb-native/collection -o $destination
+    	./node_modules/.bin/browserify $f --node  -o $destination
 	fi
 
     if [ $? != 0 ]; then
@@ -69,6 +69,10 @@ do
     destination=$(echo $f | awk '{gsub("img/","dist/img/");print}')
     cp $f $destination
 done
+
+printf "Copying styles\n"
+
+cp -R src/css dist/css
 
 printf "Done\n"
 
