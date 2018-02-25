@@ -80,9 +80,10 @@ export function loadICDEditor(
         let lastBroadcastDoc = "";
         errorMonitor = setInterval(function(){
             let status = validate(editor.getValue());
-            document.getElementById(errorOutput.id)!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
+            errorOutput!.innerHTML = `${status.code ? `Error ${status.code}: ` : ""} ${status.more}`;
             if(status.code == 0)
             {
+                errorOutput!.style.color = "green";
                 if(lastBroadcastDoc != editor.getValue())
                 {
                     lastBroadcastDoc = editor.getValue();
@@ -90,6 +91,8 @@ export function loadICDEditor(
                         onValidDocument(lastBroadcastDoc);
                 }
             }
+            else
+                errorOutput.style.color = "red";
         },1000);
 
         editor.onDidDispose(function(){
