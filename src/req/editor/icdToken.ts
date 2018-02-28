@@ -90,7 +90,13 @@ export class ICDItem extends ICDAttributes
         this.parent = parent;
     }
 }
-
+/**
+ * Populates the userValue prop of item with the value entered by the user on line
+ * 
+ * @export
+ * @param {string} line 
+ * @param {ICDItem} item 
+ */
 export function getUserValueOnItem(line : string,item : ICDItem) : void
 {
     let ref : string = (item.completionItem.insertText! as string);
@@ -271,4 +277,39 @@ export function findParentSectionFromLinePosition(
     //we've probably walked off the top of the document
     catch(err){}
     return undefined;
+}
+
+function _getAllChildItems(section : ICDSection,res : Array<ICDItem>) : void
+{
+    if(section.childItems)
+    {
+        for(let i = 0; i != section.childItems.length; ++i)
+        {
+            res.push(section.childItems[i]);
+        }
+    }
+
+    if(section.childSections)
+    {
+        for(let i = 0; i != section.childSections.length; ++i)
+        {
+            _getAllChildItems(section.childSections[i],res);
+        }
+    }
+}
+/**
+ * Retrieve all child items starting from the given section
+ * 
+ * @export
+ * @param {ICDSection} section 
+ * @returns {Array<ICDItem>} 
+ */
+export function getAllChildItems(section : ICDSection) : Array<ICDItem>
+{
+    let res : Array<ICDItem> = new Array<ICDItem>();
+
+    _getAllChildItems(section,res);
+    
+    console.log(res);
+    return res;
 }

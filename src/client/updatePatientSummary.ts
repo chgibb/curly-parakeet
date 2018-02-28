@@ -1,4 +1,4 @@
-import {findTokenFromUnknownStart,ICDItem,ICDGenericToken,ICDSection} from "./../req/editor/icdToken";
+import {findTokenFromUnknownStart,ICDItem,ICDGenericToken,ICDSection,getAllChildItems} from "./../req/editor/icdToken";
 import {buildDocumentAST} from "./../req/editor/documentAST";
 
 import {$FirstName} from "./../req/editor/sections/00/firstName";
@@ -85,6 +85,14 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
         res += `<hr style="width:100%;" />`;
     }
 
+    if(docsAST[1])
+    {
+        let allItems = getAllChildItems(docsAST[1] as ICDSection);
+        for(let i = 0 ; i != allItems.length; ++i)
+        {
+            res += `<div title="${allItems[i].completionItem.documentation}"><p>${allItems[i].completionItem.label}</p></div>`;
+        }
+    }
 
 
     div!.innerHTML = res;
