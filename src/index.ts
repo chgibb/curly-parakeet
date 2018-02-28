@@ -14,8 +14,55 @@ import {loadICDEditor,setOnValidDocument} from "./req/editor/loadICDEditor";
 
 let ICDEditor : monaco.editor.IStandaloneCodeEditor | null;
 
+let editPatientOnClick = async function(selectedPatient : PatientRecord){
+    changePage("#page_editPatient");
+    setTimeout(async function(){
+        if(!ICDEditor)
+        {
+            ICDEditor = await loadICDEditor(
+                document.getElementById("editor")!,
+                document.getElementById("documentStatus")!
+            )
+        };
+        ICDEditor!.setValue(selectedPatient!.doc);
+        setOnValidDocument(async function(doc : string){
+            updatePatientSummary(document.getElementById("editPatientSummary"),doc);
+            selectedPatient.doc = doc;
+            try
+            {
+                await makeUpdatePatientRequest(<UpdatePatientRequest>{
+                    record : selectedPatient,
+                    token : getCurrentToken()
+                });
+            }
+            catch(err)
+            {
+                alert(`Failed to save document`);
+            }
+        });
+    },100);
+};
+
 let patientListOnClick = async function(this : any){
     let id = $(this).attr("id");
+    let selectedPatient : PatientRecord;
+
+    for(let i = 0; i != patients.length; ++i)
+    {
+        if(patients[i].id == id)
+        {
+            selectedPatient = patients[i];
+            break;
+        }
+    }
+
+    updatePatientSummary(document.getElementById("patientsListSummary")!,selectedPatient!.doc);
+
+    document.getElementById("editSelectedPatient")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
+        await editPatientOnClick(selectedPatient);
+    }
+
+    /*let id = $(this).attr("id");
     let selectedPatient : PatientRecord;
     changePage("#page_editPatient");
 
@@ -51,7 +98,7 @@ let patientListOnClick = async function(this : any){
                 alert(`Failed to save document`);
             }
         });
-    },100);
+    },100);*/
     
 };
 
@@ -123,7 +170,7 @@ document.addEventListener(
             
         };
 
-        document.getElementById("button_backToPatientList")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
+        document.getElementById("page_editPatientGoBack")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
             changePage("#page_patientList");
 
             await updatePatients();

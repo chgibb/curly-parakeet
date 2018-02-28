@@ -16,10 +16,9 @@
 
 	<div data-role="page" id="page_login" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
 		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
-			 href="">About</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none">About</a>
 			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none">Help</a>
 		</div>
 
 		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
@@ -38,20 +37,23 @@
 
 	<div data-role="page" id="page_patientList" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
 		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
-			 href="">About</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none">Signout</a>
 			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" id="editSelectedPatient">Edit Patient</a>
 		</div>
 
 		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
 			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
 			<br />
 			<input type="button" id="button_createNewPatient" value="Create New Patient" />
-			<div id="patientsListContainer">
+			<div id="patientsListContainer" style="width:50%;float:left;">
 			
 				<ul id='list_patients' data-role='listview'>
 				</ul>
+			</div>
+
+			<div id="patientsListSummary" style="float:right">
+
 			</div>
 		</div>
 
@@ -62,17 +64,15 @@
 
 	<div data-role="page" id="page_editPatient" data-title="homepage" data-theme="e" style="background-repeat:repeat repeat;">
 		<div data-role="header" data-theme="e" data-fullscreen="false" data-position="false" data-tap-toggle="true" data-track-persistent-toolbars="true">
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" onclick="showAboutDialog()"
-			 href="">About</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" id="page_editPatientGoBack">Return</a>
 			<h1 style="text-align:center;">Curly Parakeet EHR</h1>
-			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none" href="">Help</a>
+			<a class="ui-btn-auto" data-theme="a" data-icon="" data-iconpos="left" data-transition="none">Help</a>
 		</div>
 
 		<div data-role="content" class="ui-content" style="margin:0px;padding:1em;">
 			<img src="img/logo.png" style="display:block;margin-left:auto;margin-right:auto;">
 			<br />
-			<input type="button" id="button_backToPatientList" value="Go Back" />
-
+			
 			<div id="editPatientSummary" style="float:right;">
 			</div>
 
