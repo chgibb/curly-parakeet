@@ -25,15 +25,24 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
 
     let docsAST = buildDocumentAST(doc);
 
-    let res = "";
-
-    res += "<p>";
-    res += getUserValueForToken(docsAST,firsNameToken);
-    res += " ";
-    res += getUserValueForToken(docsAST,lastNameToken);
-    res += "</p>";
+    let firstNameText = getUserValueForToken(docsAST,firsNameToken);
+    let lastNameText = getUserValueForToken(docsAST,lastNameToken);
 
     let addressText = getUserValueForToken(docsAST,addressToken);
+
+    let res = "";
+
+    if(firstNameText || lastNameText)
+    {
+        res += "<p>";
+        res += firstNameText;
+        res += " ";
+        res += lastNameText;
+        res += "</p>";
+        res += `<hr style="width:100%;" />`;
+    }
+
+    
 
     if(addressText)
         res += `<p>${addressText}</p>`;
