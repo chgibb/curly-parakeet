@@ -3,3 +3,11 @@
 	box-shadow: 0 0 10px #000;
 	transform: translateY(-0.01em);
 }
+
+.tooltipText {
+	text-decoration: underline;
+}
+
+.tooltipTextHover:hover{
+	text-decoration: none;
+}

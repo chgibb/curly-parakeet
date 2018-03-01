@@ -87,10 +87,11 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
 
     if(docsAST[1])
     {
+        res += `<p>Individual Ailments</p>`;
         let allItems = getAllChildItems(docsAST[1] as ICDSection);
         for(let i = 0 ; i != allItems.length; ++i)
         {
-            res += `<div title="${allItems[i].completionItem.documentation}"><p>${allItems[i].completionItem.label}</p></div>`;
+            res += `<div title="${allItems[i].completionItem.documentation}"><a class="tooltipText tooltipTextHover">${allItems[i].completionItem.label}</a></div>`;
         }
     }
 
