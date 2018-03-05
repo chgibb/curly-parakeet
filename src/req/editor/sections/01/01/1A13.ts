@@ -1,4 +1,4 @@
-import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,ICDItem,CompletionItemKind} from "./../../../icdToken";
 
 export class $1A13 extends ICDItem
 {
