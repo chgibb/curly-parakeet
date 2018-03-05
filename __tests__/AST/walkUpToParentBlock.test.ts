@@ -1,5 +1,3 @@
-/// <reference types="ts-jest" />
-
 import {
     Start,
     End,

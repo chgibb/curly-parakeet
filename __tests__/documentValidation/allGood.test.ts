@@ -1,5 +1,3 @@
-/// <reference types="ts-jest" />
-
 import {validate,DocumentStatus,DocumentStatusCode} from "./../../src/req/editor/validate";
 
 it(`should be all good 1`,() => {
