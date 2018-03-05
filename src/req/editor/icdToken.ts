@@ -138,6 +138,22 @@ export class End extends ICDGenericToken
     }
 }
 
+export class Now extends ICDItem
+{
+    public constructor()
+    {
+        super(undefined);
+        this.regExp = /\w:\s|\n/;
+        this.tokenType = "icd11.item";
+        this.completionItem = {
+            label : "Now",
+            kind : CompletionItemKind.Function,
+            documentation : "Insert the current time.",
+            insertText : `${new Date()}`
+        }
+    }
+}
+
 /**
  * Trim off the Start block declaration from the given line
  * 

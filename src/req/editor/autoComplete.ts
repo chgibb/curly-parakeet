@@ -6,13 +6,16 @@ import {
     ICDCompletionItem,
     findToken,
     ICDItem,
-    findParentSectionFromLinePosition
+    findParentSectionFromLinePosition,
+    Now
 } from "./icdToken";
 import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
 
 let startToken : Start;
 let endToken : End;
+let nowToken : Now;
+
 /**
  * Returns an array of auto completion items for the given text snippet.
  * text does not have to be a fully completed and validated document
@@ -25,15 +28,23 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
 {
     //console.log(`input string: "${text}"`);
     let res : Array<ICDCompletionItem> = new Array<ICDCompletionItem>();
+    
     if(!startToken)
         startToken = new Start();
     if(!endToken)
         endToken = new End();
+    if(!nowToken)
+        nowToken = new Now();
 
     let layout : Array<ICDGenericToken | ICDSection> = getTokenLayout();
 
     let lines = text.split(/\r\n|\n\r|\n|\r/g);
-    //console.log(lines);
+
+    if(nowToken.regExp.test(lines[lines.length-1]))
+    {
+        return [nowToken.completionItem];
+    }
+
     let starts = 0;
     let ends = 0;
     for(let i = 0; i != lines.length; ++i) 
@@ -43,6 +54,10 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         else if (endToken.regExp.test(lines[i]))
             ends++;
     }
+
+    
+
+    //autocomplete top headers
     if(starts == 0 && ends == 0 || starts == ends) 
     {
         for(let i = 0; i != layout.length; ++i)
@@ -54,6 +69,7 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         }
         return res;
     }
+
     else
     {
         let closestHeader = findParentSectionFromLinePosition(lines,lines.length-1,getTokenLayout());
