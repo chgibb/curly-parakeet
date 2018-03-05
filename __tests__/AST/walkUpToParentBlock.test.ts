@@ -10,18 +10,14 @@ import {
     findTokenFromUnknownStart
 } from "./../../src/req/editor/icdToken";
 import {getTokenLayout, buildMonarchTokens} from "./../../src/req/editor/treeLayout";
-import {$01} from "./../../src/req/editor/sections/01";
-import {Gastro} from "./../../src/req/editor/sections/01/gastro";
-import {FoodBorne} from "./../../src/req/editor/sections/01/foodBorne";
-
-let zerOne = new $01();
+import {$01} from "./../../src/req/editor/sections/01/01";
+import {Gastro} from "./../../src/req/editor/sections/01/01/gastro";
+import {FoodBorne} from "./../../src/req/editor/sections/01/01/foodBorne";
 
 let gastro = new Gastro(undefined);
 let foodBorne = new FoodBorne(undefined);
 
-let zeroOne = new $01();
-
-
+let zeroOne = new $01(undefined);
 
 it(`1 should find chapter 1 header`,() => {
     let doc = [

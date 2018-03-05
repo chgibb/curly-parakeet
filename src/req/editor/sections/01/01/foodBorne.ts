@@ -1,4 +1,4 @@
-import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,ICDItem,CompletionItemKind} from "./../../../icdToken";
 import {$1A10} from "./1A10";
 import {$1A12} from "./1A12";
 import {$1A13} from "./1A13";

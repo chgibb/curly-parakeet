@@ -2,11 +2,11 @@
 
 import {findToken,ICDGenericToken,ICDSection, findTokenFromUnknownStart} from "./../../src/req/editor/icdToken";
 import {getTokenLayout} from "./../../src/req/editor/treeLayout";
-import {$01} from "./../../src/req/editor/sections/01";
-import {Gastro} from "./../../src/req/editor/sections/01/gastro";
-import {$1A10} from "./../../src/req/editor/sections/01/1A10"
+import {$01} from "./../../src/req/editor/sections/01/01";
+import {Gastro} from "./../../src/req/editor/sections/01/01/gastro";
+import {$1A10} from "./../../src/req/editor/sections/01/01/1A10"
 
-let zeroOne = new $01();
+let zeroOne = new $01(undefined);
 let gastro = new Gastro(undefined);
 let $1a10 = new $1A10(undefined);
 

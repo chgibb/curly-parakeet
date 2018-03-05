@@ -1,4 +1,4 @@
-import {ICDSection,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,CompletionItemKind} from "./../../../icdToken";
 
 export class OfBrain extends ICDSection
 {

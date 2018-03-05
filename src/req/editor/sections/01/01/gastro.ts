@@ -1,4 +1,4 @@
-import {ICDSection,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,CompletionItemKind} from "./../../../icdToken";
 import {ViralIntestinal} from "./viralIntestinal";
 import {FoodBorne} from "./foodBorne";
 import {BacterialIntestinal} from "./bacterialIntestinal";

@@ -1,14 +1,14 @@
-import {ICDSection,CompletionItemKind} from "./../icdToken";
+import {ICDSection,CompletionItemKind} from "./../../icdToken";
 
 import {BrainOrCentralNervousSystem} from "./02/brainOrCentralNervousSystem";
 
 export class $02 extends ICDSection
 {
-    public constructor()
+    public constructor(parent : ICDSection | undefined)
     {
-        super(undefined);
+        super(parent);
         this.regExp = /(02 Neoplasms)/;
-        this.tokenType = "icd11.SectionTopHeader";
+        this.tokenType = "icd11.SectionHeader";
         this.completionItem = {
             label : "02 Neoplasms",
             kind : CompletionItemKind.Function,
