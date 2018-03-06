@@ -7,6 +7,7 @@ export class Referral extends ICDSection
         super(parent);
         this.regExp = /\bReferral\b/;
         this.tokenType = "icd11.SectionHeader";
+        this.allowDuplicates = true;
         this.completionItem = {
             label : "Referral",
             kind : CompletionItemKind.Function,
