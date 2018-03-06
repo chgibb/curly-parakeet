@@ -49,6 +49,7 @@ export class ICDAttributes extends ICDGenericToken
     public description : string;
     public completionItem : ICDCompletionItem;
     public parent : ICDAttributes | undefined;
+    public allowDuplicates = false;
 }
 
 /**

@@ -119,7 +119,7 @@ export function validate(text : string) : DocumentStatus
                         {
                             found++;
                         }
-                        if(found > 1)
+                        if(found > 1 && !section.allowDuplicates)
                         {
                             return {
                                 code : DocumentStatusCode.DuplicateToken,
