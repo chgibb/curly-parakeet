@@ -88,6 +88,15 @@ export function validate(text : string) : DocumentStatus
             {
                 let parent = findParentSectionFromLinePosition(lines,i,layout);
 
+                //chapter start nested inappropriately
+                if(section.tokenType == "icd11.SectionTopHeader" && parent)
+                {
+                    return {
+                        code : DocumentStatusCode.UnExpectedToken,
+                        more : `at line ${i+1}: "${trimStartBlockDeclaration(lines[i])}" is the start of a chapter and cannot appear within another section`
+                    }
+                }
+
                 if(parent && parent.completionItem.label != section.parent!.completionItem.label)
                 {
                     return {
