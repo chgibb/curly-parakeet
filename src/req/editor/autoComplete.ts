@@ -7,7 +7,8 @@ import {
     findToken,
     ICDItem,
     findParentSectionFromLinePosition,
-    Now
+    Now,
+    Today
 } from "./icdToken";
 import {getTokenLayout} from "./treeLayout";
 import {ICDTokenID} from "./icdTokenID";
@@ -15,6 +16,7 @@ import {ICDTokenID} from "./icdTokenID";
 let startToken : Start;
 let endToken : End;
 let nowToken : Now;
+let todaytoken : Today;
 
 /**
  * Returns an array of auto completion items for the given text snippet.
@@ -35,15 +37,26 @@ export function autoComplete(text : string): Array<ICDCompletionItem> | void
         endToken = new End();
     if(!nowToken)
         nowToken = new Now();
+    if(!todaytoken)
+        todaytoken = new Today();
 
     let layout : Array<ICDGenericToken | ICDSection> = getTokenLayout();
 
     let lines = text.split(/\r\n|\n\r|\n|\r/g);
 
+    //insert helpers
     if(nowToken.regExp.test(lines[lines.length-1]))
     {
-        return [nowToken.completionItem];
+        res.push(nowToken.completionItem);
     }
+
+    if(todaytoken.regExp.test(lines[lines.length-1]))
+    {
+        res.push(todaytoken.completionItem);
+    }
+
+    if(res.length != 0)
+        return res;
 
     let starts = 0;
     let ends = 0;

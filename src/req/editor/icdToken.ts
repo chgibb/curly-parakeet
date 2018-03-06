@@ -154,6 +154,22 @@ export class Now extends ICDItem
     }
 }
 
+export class Today extends ICDItem
+{
+    public constructor()
+    {
+        super(undefined);
+        this.regExp = /\w:\s|\n/;
+        this.tokenType = "icd11.item";
+        this.completionItem = {
+            label : "Today",
+            kind : CompletionItemKind.Function,
+            documentation : "Insert the current date.",
+            insertText : `${new Date().getDate()} ${new Date().toLocaleDateString("en-US",{month : "long"})}, ${new Date().getFullYear()}`
+        }
+    }
+}
+
 /**
  * Trim off the Start block declaration from the given line
  * 
