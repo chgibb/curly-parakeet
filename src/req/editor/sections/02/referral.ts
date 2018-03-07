@@ -1,4 +1,5 @@
-import {ICDSection,CompletionItemKind} from "./../../icdToken";
+import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
+import {$Type} from "./type";
 
 export class Referral extends ICDSection
 {
@@ -14,5 +15,7 @@ export class Referral extends ICDSection
             documentation : "Section describing a patient referral",
             insertText : `Referral Start${"\n"}    ${"\n"}End`
         };
+        this.childItems = new Array<ICDItem>();
+        this.childItems.push(new $Type(this));
     }
 }

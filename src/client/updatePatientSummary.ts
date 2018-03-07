@@ -1,6 +1,9 @@
 import {findTokenFromUnknownStart,ICDItem,ICDGenericToken,ICDSection,getAllChildItems} from "./../req/editor/icdToken";
 import {buildDocumentAST} from "./../req/editor/documentAST";
 
+import {$01} from "./../req/editor/sections/01";
+import {$02} from "./../req/editor/sections/02";
+
 import {$FirstName} from "./../req/editor/sections/00/firstName";
 import {$LastName} from "./../req/editor/sections/00/lastName";
 
@@ -25,6 +28,9 @@ function getUserValueForToken(ast : Array<ICDGenericToken | ICDSection>,token : 
 
 export function updatePatientSummary(div : HTMLElement | null,doc : string) : void
 {
+    let $01Section = new $01();
+    let $02Section = new $02();
+
     let firsNameToken = new $FirstName(undefined);
     let lastNameToken = new $LastName(undefined);
 
@@ -85,13 +91,28 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
         res += `<hr style="width:100%;" />`;
     }
 
-    if(docsAST[1])
+    for(let i = 0; i != docsAST.length; ++i)
     {
-        res += `<p>Individual Ailments</p>`;
-        let allItems = getAllChildItems(docsAST[1] as ICDSection);
-        for(let i = 0 ; i != allItems.length; ++i)
+        if((<ICDSection[]>docsAST)[i].completionItem.label == $01Section.completionItem.label)
         {
-            res += `<div title="${allItems[i].completionItem.documentation}"><a class="tooltipText tooltipTextHover">${allItems[i].completionItem.label}</a></div>`;
+            res += `<p>Individual Ailments</p>`;
+            let allItems = getAllChildItems((<ICDSection[]>docsAST)[i]);
+            for(let i = 0 ; i != allItems.length; ++i)
+            {
+                res += `<div title="${allItems[i].completionItem.documentation}"><a class="tooltipText tooltipTextHover">${allItems[i].completionItem.label}</a></div>`;
+            }
+        }
+    }
+
+    for(let i = 0; i != docsAST.length; ++i)
+    {
+        if((<ICDSection[]>docsAST)[i].completionItem.label == $02Section.completionItem.label)
+        {
+            let referrals = (<ICDSection[]>docsAST)[i];
+            for(let k = 0; k != referrals.childSections.length; ++k)
+            {
+                res += `<p>Referral</p>`;
+            }
         }
     }
 
