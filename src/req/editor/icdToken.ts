@@ -64,6 +64,7 @@ export class ICDSection extends ICDAttributes
     public childSections : Array<ICDSection>;
     public childItems : Array<ICDItem>;
     public items : Array<ICDItem>;
+    public sealed = false;
 
     public constructor(parent : ICDAttributes | undefined)
     {
@@ -232,7 +233,7 @@ export function findToken(
 {
     let res : ICDSection | ICDItem | undefined = undefined;
     line = trimStartBlockDeclaration(line);
-    if(start.regExp.test(line))
+    if(start.regExp.test(line) && !start.sealed)
         return start;
     
     if(start.childItems)

@@ -1,19 +1,17 @@
 import {ICDSection,ICDItem,CompletionItemKind} from "./../../icdToken";
 
-export class $Type extends ICDItem
+export class $To extends ICDItem
 {
     public constructor(parent : ICDSection | undefined)
     {
         super(parent);
-        this.regExp = /(Type:)/;
+        this.regExp = /(To:)/;
         this.tokenType = "icd11.item";
         this.allowDuplicates = true;
         this.completionItem = {
-            label : "Type",
+            label : "To",
             kind : CompletionItemKind.Function,
-            documentation : "The kind of referral being made",
-            insertText : "- Type: "
-        }
-
+            insertText : "- To: "
+        };
     }
 }

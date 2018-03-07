@@ -36,6 +36,9 @@ export function buildDocumentAST(doc : string) : Array<ICDGenericToken | ICDSect
             let parent = (<ICDSection>findTokenFromUnknownStart(res,token!.parent!.completionItem.label));
             parent.childItems.push(copyToken((<ICDItem>token)));
             getUserValueOnItem(lines[i],(<ICDItem>parent.childItems[parent.childItems.length-1]));
+            let refParent = (<ICDSection>findTokenFromUnknownStart(layout,token!.parent!.completionItem.label));
+            if(parent.allowDuplicates && !parent.sealed && refParent.childItems.length == parent.childItems.length)
+                parent.sealed = true;
         }
     }
 

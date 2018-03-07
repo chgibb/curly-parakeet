@@ -2,6 +2,7 @@
 
 import {ICDSection,ICDGenericToken, findTokenFromUnknownStart, ICDItem, ICDAttributes} from "./../../src/req/editor/icdToken";
 import {buildDocumentAST,copyAndStripChildren,copyToken} from "./../../src/req/editor/documentAST";
+import {validate, DocumentStatusCode} from "./../../src/req/editor/validate";
 import {getTokenLayout,buildMonarchTokens} from "./../../src/req/editor/treeLayout";
 
 it(`should build correct AST for document 1`,() => {
@@ -85,6 +86,57 @@ it(`should build correct AST for document 2`,() => {
     //02 Neoplasms
     expect((<ICDSection>res[2]).childSections.length).toEqual(0);
     expect((<ICDSection>res[2]).childItems.length).toEqual(0);*/
+});
+
+it(`should allow duplicates 1`,() => {
+    let doc = [
+        "02 Referrals Start",
+        "   Referral Start",
+        "      - To: Dr. Mago",
+        "      - Type: Computing",
+        "   End",
+        "   Referral Start",
+        "       - To: Dr. Benson",
+        "   End",
+        "End"
+    ];
+
+    expect(validate(doc.join("\n")).code).toBe(DocumentStatusCode.Valid);
+
+    let res = buildDocumentAST(doc.join("\n"));
+
+    expect(res.length).toEqual(1);
+
+    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(2);
+    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(1);
+    expect((<ICDSection>res[0]).childSections[0].childItems[0].userValue).toEqual("Dr. Mago");
+    expect((<ICDSection>res[0]).childSections[1].childItems[0].userValue).toEqual("Dr. Benson");
+});
+
+it(`should allow duplicates 2`,() => {
+    let doc = [
+        "02 Referrals Start",
+        "   Referral Start",
+        "      - To: Dr. Mago",
+        "       - Type: Computing",
+        "   End",
+        "   Referral Start",
+        "       - To: Dr. Benson",
+        "       - Type: Computing",
+        "   End",
+        "End"
+    ];
+
+    expect(validate(doc.join("\n")).code).toBe(DocumentStatusCode.Valid);
+
+    let res = buildDocumentAST(doc.join("\n"));
+
+    expect(res.length).toEqual(1);
+
+    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(2);
+    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(2);
+    expect((<ICDSection>res[0]).childSections[0].childItems[0].userValue).toEqual("Dr. Mago");
+    expect((<ICDSection>res[0]).childSections[1].childItems[0].userValue).toEqual("Dr. Benson");
 });
 
 let tokens = buildMonarchTokens(getTokenLayout(),true);

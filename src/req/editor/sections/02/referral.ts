@@ -1,5 +1,6 @@
 import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
 import {$Type} from "./type";
+import {$To} from "./to";
 
 export class Referral extends ICDSection
 {
@@ -17,5 +18,6 @@ export class Referral extends ICDSection
         };
         this.childItems = new Array<ICDItem>();
         this.childItems.push(new $Type(this));
+        this.childItems.push(new $To(this));
     }
 }

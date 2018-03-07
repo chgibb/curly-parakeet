@@ -14,6 +14,8 @@ import {$Province} from "./../req/editor/sections/00/province";
 import {$SocialInsuranceNumber} from "./../req/editor/sections/00/socialInsuranceNumber";
 import {$HealthCareNumber} from "./../req/editor/sections/00/healthCareNumber";
 
+import {$To} from "./../req/editor/sections/02/to";
+
 function getUserValueForToken(ast : Array<ICDGenericToken | ICDSection>,token : ICDItem) : string
 {
     let tokenFromAST = (findTokenFromUnknownStart(
@@ -41,7 +43,10 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
     let socialInsuranceNumberToken = new $SocialInsuranceNumber(undefined);
     let healthCareNumberToken = new $HealthCareNumber(undefined);
 
+    let toToken = new $To(undefined);
+
     let docsAST = buildDocumentAST(doc);
+    console.log(docsAST);
 
     let firstNameText = getUserValueForToken(docsAST,firsNameToken);
     let lastNameText = getUserValueForToken(docsAST,lastNameToken);
@@ -111,7 +116,20 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
             let referrals = (<ICDSection[]>docsAST)[i];
             for(let k = 0; k != referrals.childSections.length; ++k)
             {
-                res += `<p>Referral</p>`;
+                for(let j = 0; j != referrals.childSections[k].childItems.length; ++j)
+                {
+                    console.log(referrals.childSections[k]);
+                    if(referrals.childSections[k].childItems[j].completionItem.label == toToken.completionItem.label)
+                    {
+                        let toText = getUserValueForToken([referrals.childSections[k]],toToken);
+                        if(toText)
+                        {
+                            res += `<hr style="width:100%;" />`;
+                            res += `<p>Referral to ${toText}</p>`;
+                            res += `<hr style="width:100%;" />`;
+                        }
+                    }
+                }
             }
         }
     }
