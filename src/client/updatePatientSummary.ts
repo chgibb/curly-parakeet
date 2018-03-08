@@ -51,18 +51,18 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
     let orderedToken = new $Ordered(undefined);
     let completedToken = new $Completed(undefined);
 
-    let docsAST = buildDocumentAST(doc);
-    console.log(docsAST);
+    let docAST = buildDocumentAST(doc);
+    console.log(docAST);
 
-    let firstNameText = getUserValueForToken(docsAST,firsNameToken);
-    let lastNameText = getUserValueForToken(docsAST,lastNameToken);
+    let firstNameText = getUserValueForToken(docAST,firsNameToken);
+    let lastNameText = getUserValueForToken(docAST,lastNameToken);
 
-    let addressText = getUserValueForToken(docsAST,addressToken);
-    let cityText = getUserValueForToken(docsAST,cityToken);
-    let provinceText = getUserValueForToken(docsAST,provinceToken);
+    let addressText = getUserValueForToken(docAST,addressToken);
+    let cityText = getUserValueForToken(docAST,cityToken);
+    let provinceText = getUserValueForToken(docAST,provinceToken);
 
-    let socialInsuranceNumberText = getUserValueForToken(docsAST,socialInsuranceNumberToken);
-    let healthCareNumberText = getUserValueForToken(docsAST,healthCareNumberToken);
+    let socialInsuranceNumberText = getUserValueForToken(docAST,socialInsuranceNumberToken);
+    let healthCareNumberText = getUserValueForToken(docAST,healthCareNumberToken);
 
     let res = "";
 
@@ -102,12 +102,12 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
         res += `<hr style="width:100%;" />`;
     }
 
-    for(let i = 0; i != docsAST.length; ++i)
+    for(let i = 0; i != docAST.length; ++i)
     {
-        if((<ICDSection[]>docsAST)[i].completionItem.label == $01Section.completionItem.label)
+        if((<ICDSection[]>docAST)[i].completionItem.label == $01Section.completionItem.label)
         {
             res += `<p>Individual Ailments</p>`;
-            let allItems = getAllChildItems((<ICDSection[]>docsAST)[i]);
+            let allItems = getAllChildItems((<ICDSection[]>docAST)[i]);
             for(let i = 0 ; i != allItems.length; ++i)
             {
                 res += `<div title="${allItems[i].completionItem.documentation}"><a class="tooltipText tooltipTextHover">${allItems[i].completionItem.label}</a></div>`;
@@ -115,11 +115,11 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
         }
     }
 
-    for(let i = 0; i != docsAST.length; ++i)
+    for(let i = 0; i != docAST.length; ++i)
     {
-        if((<ICDSection[]>docsAST)[i].completionItem.label == $02Section.completionItem.label)
+        if((<ICDSection[]>docAST)[i].completionItem.label == $02Section.completionItem.label)
         {
-            let referrals = (<ICDSection[]>docsAST)[i];
+            let referrals = (<ICDSection[]>docAST)[i];
             for(let k = 0; k != referrals.childSections.length; ++k)
             {
                 for(let j = 0; j != referrals.childSections[k].childItems.length; ++j)
