@@ -2,6 +2,7 @@ import {ICDSection,CompletionItemKind, ICDItem} from "./../../icdToken";
 import {$Type} from "./type";
 import {$To} from "./to";
 import {$Ordered} from "./ordered";
+import {$Completed} from "./completed";
 
 export class Referral extends ICDSection
 {
@@ -21,5 +22,6 @@ export class Referral extends ICDSection
         this.childItems.push(new $Type(this));
         this.childItems.push(new $To(this));
         this.childItems.push(new $Ordered(this));
+        this.childItems.push(new $Completed(this));
     }
 }

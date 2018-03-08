@@ -94,12 +94,14 @@ it(`should allow duplicates 1`,() => {
         "   Referral Start",
         "      - To: Dr. Mago",
         "      - Type: Computing",
-        "      - Ordered: 8/3/18",
+        "      - Ordered: 8 March, 2018",
+        "      - Completed: 8 March, 2018",
         "   End",
         "   Referral Start",
         "       - To: Dr. Benson",
         "       - Type: Computing",
-        "       - Ordered: 8/3/18",
+        "       - Ordered: 8 March, 2018",
+        "       - Completed: 8 March, 2018",
         "   End",
         "End"
     ];
@@ -110,8 +112,8 @@ it(`should allow duplicates 1`,() => {
 
     expect(res.length).toEqual(1);
 
-    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(3);
-    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(3);
+    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(4);
+    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(4);
     expect((<ICDSection>res[0]).childSections[0].childItems[0].userValue).toEqual("Dr. Mago");
     expect((<ICDSection>res[0]).childSections[1].childItems[0].userValue).toEqual("Dr. Benson");
 });
@@ -122,12 +124,14 @@ it(`should allow duplicates 2`,() => {
         "   Referral Start",
         "      - To: Dr. Mago",
         "      - Type: Computing",
-        "      - Ordered: 8/3/18",
+        "      - Ordered: 8 March, 2018",
+        "      - Completed:  8 March, 2018",
         "   End",
         "   Referral Start",
         "       - To: Dr. Benson",
         "       - Type: Computing",
-        "       - Ordered: 8/3/18",
+        "       - Ordered: 8 March, 2018",
+        "       - Completed:  8 March, 2018",
         "   End",
         "End"
     ];
@@ -138,8 +142,8 @@ it(`should allow duplicates 2`,() => {
 
     expect(res.length).toEqual(1);
 
-    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(3);
-    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(3);
+    expect((<ICDSection>res[0]).childSections[0].childItems.length).toEqual(4);
+    expect((<ICDSection>res[0]).childSections[1].childItems.length).toEqual(4);
     expect((<ICDSection>res[0]).childSections[0].childItems[0].userValue).toEqual("Dr. Mago");
     expect((<ICDSection>res[0]).childSections[1].childItems[0].userValue).toEqual("Dr. Benson");
 });
