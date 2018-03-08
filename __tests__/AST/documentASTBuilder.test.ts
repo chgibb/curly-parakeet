@@ -71,21 +71,21 @@ it(`should build correct AST for document 2`,() => {
     //01 Certain Infectious or Parasitic Diseases
     expect((<ICDSection>res[1]).childSections[0].childSections.length).toEqual(1);
 
-    //01 Certain Infectious or Parasitic Diseases
-    /*console.log(res[1]);
-    expect((<ICDSection>res[1]).childSections.length).toEqual(1);
-    expect((<ICDSection>res[1]).childItems.length).toEqual(0);
     //Gastroenteritis and Colitis of Infectious Origin
-    expect((<ICDSection>res[1]).childSections[0].childSections.length).toEqual(3);
+    expect((<ICDSection>res[1]).childSections[0].childSections[0].childSections.length).toEqual(3);
+    
     //Bacterial Foodborne Intoxications
-    expect((<ICDSection>res[1]).childSections[0].childSections[0].childItems.length).toEqual(3);
+    expect((<ICDSection>res[1]).childSections[0].childSections[0].childSections[0].childItems.length).toEqual(3);
+    
     //Bacterial intestinal infections
-    expect((<ICDSection>res[1]).childSections[0].childSections[1].childItems.length).toEqual(2);
+    expect((<ICDSection>res[1]).childSections[0].childSections[0].childSections[1].childItems.length).toEqual(2);
+    
     //Viral intestinal infections
-    expect((<ICDSection>res[1]).childSections[0].childSections[2].childItems.length).toEqual(1);
+    expect((<ICDSection>res[1]).childSections[0].childSections[0].childSections[2].childItems.length).toEqual(1);
+    
     //02 Neoplasms
-    expect((<ICDSection>res[2]).childSections.length).toEqual(0);
-    expect((<ICDSection>res[2]).childItems.length).toEqual(0);*/
+    expect((<ICDSection>res[1]).childSections[1].childSections.length).toEqual(0);
+    expect((<ICDSection>res[1]).childSections[1].childItems.length).toEqual(0);
 });
 
 it(`should allow duplicates 1`,() => {
