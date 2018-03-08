@@ -4,7 +4,7 @@
   "description": "COMP4310 Web Health Informatics Final Project",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/tsc && ./node_modules/.bin/jest",
+    "test": "bash scripts/test.bash",
     "serve": "cd dist && node server",
     "build": "bash scripts/bundle.bash"
   },
