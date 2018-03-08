@@ -24,7 +24,8 @@ export enum DocumentStatusCode
     UnBalanced = 2,
     UnKnownToken = 3,
     UnExpectedToken = 4,
-    DuplicateToken = 5
+    DuplicateToken = 5,
+    IncompleteSection = 6
 }
 
 export interface DocumentStatus
@@ -125,6 +126,25 @@ export function validate(text : string) : DocumentStatus
                                 code : DocumentStatusCode.DuplicateToken,
                                 more : `Duplicate token "${trimStartBlockDeclaration(lines[i])}" at line ${i+1}`
                             }
+                        }
+                    }
+                }
+                if(section.tokenType == "icd11.SectionHeader" && section.allowDuplicates)
+                {
+                    let foundItems = 0;
+                    for(let k = i; k != lines.length; ++k)
+                    {
+                        if(endToken.regExp.test(lines[k]))
+                            break;
+                        let item = findTokenFromUnknownStart([(<ICDSection>section)],lines[k]);
+                        if(item && item.parent && item.parent.completionItem.label == section.completionItem.label)
+                            foundItems++;
+                    }
+                    if(foundItems != (<ICDSection>section).childItems.length)
+                    {
+                        return {
+                            code : DocumentStatusCode.IncompleteSection,
+                            more : `at line ${i+1}: Section "${trimStartBlockDeclaration(lines[i])}" must be fully completed`
                         }
                     }
                 }
