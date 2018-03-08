@@ -15,6 +15,9 @@ import {$SocialInsuranceNumber} from "./../req/editor/sections/00/socialInsuranc
 import {$HealthCareNumber} from "./../req/editor/sections/00/healthCareNumber";
 
 import {$To} from "./../req/editor/sections/02/to";
+import {$Type} from "./../req/editor/sections/02/type";
+import {$Ordered} from "./../req/editor/sections/02/ordered";
+import {$Completed} from "./../req/editor/sections/02/completed";
 
 function getUserValueForToken(ast : Array<ICDGenericToken | ICDSection>,token : ICDItem) : string
 {
@@ -44,6 +47,9 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
     let healthCareNumberToken = new $HealthCareNumber(undefined);
 
     let toToken = new $To(undefined);
+    let typeToken = new $Type(undefined);
+    let orderedToken = new $Ordered(undefined);
+    let completedToken = new $Completed(undefined);
 
     let docsAST = buildDocumentAST(doc);
     console.log(docsAST);
@@ -118,14 +124,19 @@ export function updatePatientSummary(div : HTMLElement | null,doc : string) : vo
             {
                 for(let j = 0; j != referrals.childSections[k].childItems.length; ++j)
                 {
-                    console.log(referrals.childSections[k]);
                     if(referrals.childSections[k].childItems[j].completionItem.label == toToken.completionItem.label)
                     {
                         let toText = getUserValueForToken([referrals.childSections[k]],toToken);
-                        if(toText)
+                        let typeText = getUserValueForToken([referrals.childSections[k]],typeToken);
+                        let orderedText = getUserValueForToken([referrals.childSections[k]],orderedToken);
+                        let completedText = getUserValueForToken([referrals.childSections[k]],completedToken);
+
+                        if(toText && typeText)
                         {
                             res += `<hr style="width:100%;" />`;
-                            res += `<p>Referral to ${toText}</p>`;
+                            res += `<p>Referral to ${toText} for ${typeText}</p>`;
+                            res += `<p>Ordered on ${orderedText}</p>`;
+                            res += `<p>Completed on ${completedText}</p>`;
                             res += `<hr style="width:100%;" />`;
                         }
                     }
