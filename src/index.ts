@@ -61,44 +61,6 @@ let patientListOnClick = async function(this : any){
     document.getElementById("editSelectedPatient")!.onclick = async function(this : HTMLElement,ev : MouseEvent){
         await editPatientOnClick(selectedPatient);
     }
-
-    /*let id = $(this).attr("id");
-    let selectedPatient : PatientRecord;
-    changePage("#page_editPatient");
-
-    for(let i = 0; i != patients.length; ++i)
-    {
-        if(patients[i].id == id)
-        {
-            selectedPatient = patients[i];
-            break;
-        }
-    }
-    setTimeout(async function(){
-        if(!ICDEditor)
-        {
-            ICDEditor = await loadICDEditor(
-                document.getElementById("editor")!,
-                document.getElementById("documentStatus")!
-            )
-        };
-        ICDEditor!.setValue(selectedPatient!.doc);
-        setOnValidDocument(async function(doc : string){
-            updatePatientSummary(document.getElementById("editPatientSummary"),doc);
-            selectedPatient.doc = doc;
-            try
-            {
-                await makeUpdatePatientRequest(<UpdatePatientRequest>{
-                    record : selectedPatient,
-                    token : getCurrentToken()
-                });
-            }
-            catch(err)
-            {
-                alert(`Failed to save document`);
-            }
-        });
-    },100);*/
     
 };
 
@@ -128,6 +90,8 @@ document.addEventListener(
                 {
                     setCurrentToken(response.token);
                     changePage("#page_patientList");
+                    await updatePatients();
+                    await updatePatientList(patients,patientListOnClick);
                 }
             }
             catch(err)
