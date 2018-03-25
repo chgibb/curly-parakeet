@@ -70,6 +70,13 @@ do
     cp $f $destination
 done
 
+printf "Copying distribution scripts\n"
+for f in scripts/dist/*.bash
+do
+    destination=$(echo $f | awk '{gsub("scripts/dist/","dist/");print}')
+    cp $f $destination
+done
+
 printf "Copying styles\n"
 
 cp -R src/css dist/css
