@@ -23,7 +23,7 @@ it(`should be able to find created user`,async () => {
 it(`should be able to auth user`,async () => {
     let res = await authenticate(`testUser`,makeHash("password"));
 
-    expect(res).toBeTruthy();
+    expect(res).not.toEqual("");
 
     let record = await find<User>("db/users.json",function(item : User){
         if(item.userName == `testUser` && item.password == makeHash("password"))
@@ -59,7 +59,7 @@ for(let i = 0; i != 150; ++i)
     it(`should be able to auth user ${i}`,async () => {
         let res = await authenticate(`testUser${i}`,makeHash("password"));
     
-        expect(res).toBeTruthy();
+        expect(res).not.toEqual("");
     
         let record = await find<User>("db/users.json",function(item : User){
             if(item.userName == `testUser${i}` && item.password == makeHash("password"))
