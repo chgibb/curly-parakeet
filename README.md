@@ -1,5 +1,5 @@
 # curly-parakeet
-[![Build Status](https://travis-ci.org/chgibb/curly-parakeet.svg?branch=master)](https://travis-ci.org/chgibb/curly-parakeet)[![](https://tokei.rs/b1/github/chgibb/curly-prakeet?category=files)](https://github.com/Aaronepower/tokei) [![](https://tokei.rs/b1/github/chgibb/curly-parakeet?category=lines)](https://github.com/Aaronepower/tokei)  
+[![Build Status](https://travis-ci.org/chgibb/curly-parakeet.svg?branch=master)](https://travis-ci.org/chgibb/curly-parakeet)[![](https://tokei.rs/b1/github/chgibb/curly-parakeet?category=files)](https://github.com/Aaronepower/tokei) [![](https://tokei.rs/b1/github/chgibb/curly-parakeet?category=lines)](https://github.com/Aaronepower/tokei)  
 COMP4310 Web Health Informatics Final Project  
 An experiment in creating a (mostly) formally verified, domain specific markup language for electronic patient records and patient modeling.
 
